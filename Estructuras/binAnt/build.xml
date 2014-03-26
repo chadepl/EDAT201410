@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<!-- 
+Universidad de los Andes (Bogotá - Colombia)
+Departamento de Ingeniería de Sistemas y Computación 
+Licenciado bajo el esquema Academic Free License version 2.1 
+
+Autor: Nicolas Chaves y Daniel Vargas
+-->
+<project name="Estructuras" default="build" basedir="../"  >
+
+	<!--
+	*******************************************************
+		Generales
+	*******************************************************
+	-->
+	
+
+	<!-- Classpath para compilación -->
+	<path id="classpath">
+		<fileset dir="./lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Classpath para compilación de pruebas -->
+	<path id="classpathTests">
+		<fileset dir="./test/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="./lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="classes" />
+	</path>
+
+	<!-- Inicialización de las Propiedades -->
+	<target name="init" description="Inicializa las propiedades">
+		<!-- Definición de Propiedades -->
+		<property name="source" value="./src" />
+		<property name="classes" value="./bin" />
+		<property name="data" value="./data" />
+		<property name="jar" value="EstructurasNicolasDaniel.jar" />
+		<property name="bin" value="./bin" />
+		<property name="lib" value="./lib" />
+		<property name="test" value="./tests" />
+		<property name="dist" value="./dist" />
+		<property name="javadoc" value="./docs/api" />
+		<!-- Borra y crea los directorios nuevamente -->
+		<delete dir="${classes}" />
+		<mkdir dir="${classes}" />
+		<delete dir="${dist}" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<!--
+	*******************************************************
+		Ejercicio
+	*******************************************************
+	-->
+
+	<!-- Compilación -->
+	<target name="compile" description="Compilación" depends="init">
+		<!-- Compila -->
+		<javac destdir="${classes}" debug="on" deprecation="on" optimize="on" classpathref="classpath"
+			includeantruntime="false">
+			<src path="${source}" />
+		</javac>
+	</target>
+
+	<!-- Creación de JAR -->
+	<target name="build" depends="compile" description="Crea el JAR de la aplicación">
+		<!-- Empaqueta las clases en un JAR -->
+		<jar jarfile="${dist}/${jar}">
+			<fileset dir="${classes}" />
+			<!--Variables del manifest-->
+			<manifest>
+			</manifest>
+		</jar>
+	
+	</target>
+
+	
+	<!-- Generación del javadoc -->
+	<target name="javaDoc" depends="init" description="Genera el java doc de la aplicación">
+		<javadoc destdir="${javadoc}">
+			<fileset dir="${source}" />
+		</javadoc>
+	</target>
+
+</project>
