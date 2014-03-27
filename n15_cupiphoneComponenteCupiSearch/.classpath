@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="test/source"/>
+	<classpathentry kind="src" path="source"/>
+	<classpathentry kind="lib" path="lib/cupiphoneSDK.jar"/>
+	<classpathentry kind="lib" path="lib/EstructurasNicolasDaniel.jar"/>
+	<classpathentry kind="lib" path="lib/Cupi2Collections.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.7.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
