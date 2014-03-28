@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import uniandes.cupi2.componenteBusqueda.mundo.Categoria;
 import uniandes.cupi2.componenteBusqueda.mundo.ComponenteBusqueda;
 import uniandes.cupi2.componenteBusqueda.webCrawler.Resource;
 
@@ -14,15 +15,15 @@ public class ComponenteBusquedaPanel extends JPanel {
 
 	
 	
-//	public static void main(String[] args) {
-//		JFrame frim=new JFrame();
-//		frim.setSize(new Dimension(330,540));
-//		ComponenteBusquedaPanel f=new ComponenteBusquedaPanel();
-//		frim.getContentPane().add(f);
-//		frim.setVisible(true);
-//	}
+	public static void main(String[] args) {
+		JFrame frim=new JFrame();
+		frim.setSize(new Dimension(330,540));
+		ComponenteBusquedaPanel f=new ComponenteBusquedaPanel(mundo);
+		frim.getContentPane().add(f);
+		frim.setVisible(true);
+	}
 	
-	private   ComponenteBusqueda mundo;
+	private  static ComponenteBusqueda mundo;
 	
 	private PanelBienvenida bienvenida;
 	private PanelExploracion exploracion;
@@ -31,7 +32,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 	private PanelHistorial historial;
 	private PanelCategorias categorias;
 	private PanelRecursos recursos;
-	
+	private PanelAgregarCategoria agregar;
 	
 	
 	
@@ -39,8 +40,13 @@ public class ComponenteBusquedaPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ComponenteBusquedaPanel(ComponenteBusqueda ventana) {
-		mundo=ventana;
-		//mundo=new ComponenteBusqueda();
+		if(ventana!=null){
+			mundo=ventana;
+		}else{
+			mundo=new ComponenteBusqueda(null);	
+		}
+		
+		
 		
 		setPreferredSize(new Dimension(330, 540));
 		
@@ -71,7 +77,9 @@ public class ComponenteBusquedaPanel extends JPanel {
 	
 	public void mostrarCategorias() {
 		remove(bienvenida);
-		add(categorias= new PanelCategorias(this));
+		//if(mundo.)
+		//Categoria[] arreglo=mundo.darArregloCategorias();
+		add(categorias= new PanelCategorias(this,null));
 		
 	}
 	
@@ -81,7 +89,12 @@ public class ComponenteBusquedaPanel extends JPanel {
 		add(recursos= new PanelRecursos(this,null));
 	}
 	
-	
+	public void mostrarAgregar() {
+		// TODO Auto-generated method stub
+		remove(categorias);
+		add(agregar=new PanelAgregarCategoria(this));
+	}
+
 	private void mostrarPanelRescursos() {
 		remove(exploracion);
 		Resource[] arreglo=mundo.darArregloIndice();
@@ -115,6 +128,13 @@ public class ComponenteBusquedaPanel extends JPanel {
 		add(historial = new PanelHistorial(this,mundo.darHistorialExploraciones2()));
 		
 	}
+	
+	private void agregarCategoria(String nombre,String descripcion){
+		mundo.crearCategoria(nombre, descripcion);
+		remove(agregar);
+		Categoria[] arreglo=mundo.darArregloCategorias();
+		add(categorias= new PanelCategorias(this,arreglo));
+	}
 
 	public void anadirSitio(String text) {
 		mundo.agregarSitioFuente(text);
@@ -140,6 +160,8 @@ public class ComponenteBusquedaPanel extends JPanel {
 	public ComponenteBusqueda darMundo(){
 		return mundo;
 	}
+
+	
 
 	
 

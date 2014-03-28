@@ -74,27 +74,57 @@ public class Query implements Comparable<Query>{
 		}
 	}
 
+	public void explorarRecursivo(String[] sources, int inicial,int terminal,int tiempo){
+		Lista<String> links=new Lista<String>();
+		try{
+		for(String s: sources){
+		Document doc=Jsoup.connect(s).get();
+		Elements es=doc.getAllElements();
+		for(Element e:es){
+			if(e.tagName().equals("img")){
+				Resource recurso=new Resource(s, "img", e.attr("src"));
+				resources.agregar(recurso);
+			}
+			if(e.tagName().equals("a")){
+				Resource recurso=new Resource(s, "a", e.attr("href"));
+				resources.agregar(recurso);
+				links.agregar(recurso.getUrl());
+				
+			}
+			if(e.tagName().matches("h[1-7]")){
+				Resource recurso=new Resource(s, e.tagName() , e.text());
+				resources.agregar(recurso);
+			}
+			
+		}
+		
+		}
+		}catch(Exception e){
+			
+		}
+		
+	}
 	
 	/**
 	 * 
 	 * @param sources
 	 * @param depth
 	 */
-	public void explorarRecursivo(String[] sources,int depth) {
-		try{
-		long start=System.currentTimeMillis();
-		for(int i=0;i<sources.length;i++){
-			Document doc=Jsoup.connect(sources[i]).get();
-			Elements e=doc.getAllElements();
-			for(Element elemento:e){
-				
-		//		Resource recurso=new Resource(source[i], elemento.id(), nThingTagged)
-			}
-		}
-		
-		}catch(Exception e){}
-
-	}
+//	public void explorarRecursivo(String[] sources,int depth) {
+//		try{
+//		long start=System.currentTimeMillis();
+//		for(int i=0;i<sources.length;i++){
+//			Document doc=Jsoup.connect(sources[i]).get();
+//			Elements e=doc.getAllElements();
+//			for(Element elemento:e){
+//				
+//		//		Resource recurso=new Resource(source[i], elemento.id(), nThingTagged)
+//			}
+//		}
+//		
+//		}catch(Exception e){}
+//
+//	}
 	
 	
 	private String[] darArreglo(Lista<String> cadena){

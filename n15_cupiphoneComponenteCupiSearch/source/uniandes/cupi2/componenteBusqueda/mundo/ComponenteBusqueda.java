@@ -281,6 +281,24 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		}
 		return tempIndice;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Categoria[] darArregloCategorias(){
+		Iterator<Categoria> i=categorias.iterator();
+		Categoria[] tempIndice=new Categoria[categorias.darPeso()];
+		int j=0;
+		while(i.hasNext()){
+			Categoria temp=i.next();
+			tempIndice[j]=temp;
+			j++;
+		}
+		return tempIndice;
+	}
+	
+	
 	@Override
 	public String mostrarResultadoDeBusqueda(Query nExploracion) {
 		return (exploraciones.buscar((Query) nExploracion)!=null)?exploraciones.buscar((Query) nExploracion).toString():"";
@@ -295,6 +313,11 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 			System.err.println("No se pudo guardar los datos");
 			e.printStackTrace();
 		}
+	}
+	
+	public ArbolBinAVL<Categoria> darCategorias(){
+		return null;
+		
 	}
 
 }
