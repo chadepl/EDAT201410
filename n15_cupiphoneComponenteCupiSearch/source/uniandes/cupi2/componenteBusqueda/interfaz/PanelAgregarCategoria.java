@@ -9,11 +9,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 public class PanelAgregarCategoria extends JPanel implements ActionListener {
 	private JTextField textField;
-	private JTextField textField_1;
 	private ComponenteBusquedaPanel principal;
+	private JTextArea textArea;
 
 	/**
 	 * Create the panel.
@@ -32,11 +33,6 @@ public class PanelAgregarCategoria extends JPanel implements ActionListener {
 		add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(23, 206, 294, 141);
-		add(textField_1);
-		textField_1.setColumns(10);
-		
 		JButton btnAgregarCategoria = new JButton("Agregar Categoria");
 		btnAgregarCategoria.addActionListener(this);
 		btnAgregarCategoria.setActionCommand("agregar");
@@ -50,6 +46,10 @@ public class PanelAgregarCategoria extends JPanel implements ActionListener {
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(23, 93, 61, 16);
 		add(lblNombre);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(23, 201, 297, 154);
+		add(textArea);
 
 	}
 
@@ -60,7 +60,9 @@ public class PanelAgregarCategoria extends JPanel implements ActionListener {
 		
 		if(comando.equals("agregar"))
 		{
-			
+			String nombre=textField.getText();
+			String descripcion=textArea.getText();
+			principal.agregarCategoria(nombre, descripcion);
 		}
 	}
 }

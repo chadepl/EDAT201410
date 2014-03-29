@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -20,75 +21,70 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 	private JButton btnVolver;
 	private JCheckBox chckbxImagenes;
 	private JCheckBox chckbxDocumentos;
-	private JCheckBox chckbxLinks;
-	private JCheckBox chckbxOtros;
 	private JRadioButton rdbtnIgual;
 	private JRadioButton rdbtnIncluye;
 	private JRadioButton rdbtnNoIncluye;
+	private final static String RUTA="./data/imagenes/";
 	
 	private ComponenteBusquedaPanel principal;
+	private JLabel labelCriterio;
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelBusqueda(ComponenteBusquedaPanel ventana) {
 		principal=ventana;
-		setPreferredSize(new Dimension(330, 540));
+		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
-		JLabel lblZonaBusqueda = new JLabel("ZONA BUSQUEDA");
-		lblZonaBusqueda.setBounds(51, 72, 167, 16);
+		JLabel lblZonaBusqueda = new JLabel(new ImageIcon(RUTA+"buscar.png"));
+		lblZonaBusqueda.setBounds(0, 6, 334, 108);
 		add(lblZonaBusqueda);
 		
 		textField = new JTextField();
-		textField.setBounds(51, 140, 225, 28);
+		textField.setBounds(0, 157, 334, 28);
 		add(textField);
 		textField.setColumns(10);
 		
 		rdbtnIgual = new JRadioButton("Igual");
-		rdbtnIgual.setBounds(45, 225, 68, 23);
+		rdbtnIgual.setBounds(51, 197, 68, 23);
 		add(rdbtnIgual);
 		
 		rdbtnIncluye = new JRadioButton("Incluye");
-		rdbtnIncluye.setBounds(114, 225, 77, 23);
+		rdbtnIncluye.setBounds(114, 197, 77, 23);
 		add(rdbtnIncluye);
 		
 		rdbtnNoIncluye = new JRadioButton("No Incluye");
-		rdbtnNoIncluye.setBounds(189, 225, 99, 23);
+		rdbtnNoIncluye.setBounds(191, 197, 99, 23);
 		add(rdbtnNoIncluye);
 		
 		chckbxImagenes = new JCheckBox("Imagenes");
-		chckbxImagenes.setBounds(51, 329, 92, 23);
+		chckbxImagenes.setBounds(51, 256, 92, 23);
 		add(chckbxImagenes);
 		
-		chckbxLinks = new JCheckBox("Links");
-		chckbxLinks.setBounds(162, 329, 128, 23);
-		add(chckbxLinks);
-		
-		chckbxDocumentos = new JCheckBox("Documentos");
-		chckbxDocumentos.setBounds(49, 364, 112, 23);
+		chckbxDocumentos = new JCheckBox("Texto");
+		chckbxDocumentos.setBounds(180, 256, 112, 23);
 		add(chckbxDocumentos);
 		
-		chckbxOtros = new JCheckBox("Otros");
-		chckbxOtros.setBounds(162, 364, 77, 23);
-		add(chckbxOtros);
-		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(22, 292, 280, 12);
+		separator.setBounds(27, 232, 280, 12);
 		add(separator);
 		
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(114, 433, 117, 29);
+		btnBuscar = new JButton();
+		ImageIcon imagen = new ImageIcon(RUTA+"btnbuscar.png");
+		btnBuscar.setIcon(imagen);
+		btnBuscar.setBounds(0, 291, 334, 81);
 		add(btnBuscar);
 		
-		btnVolver = new JButton("<-");
-		btnVolver.setBounds(285, 505, 39, 29);
+		btnVolver = new JButton();
+		ImageIcon imagen1 = new ImageIcon(RUTA+"volver.png");
+		btnVolver.setIcon(imagen1);
+		btnVolver.setBounds(0, 373, 334, 29);
 		add(btnVolver);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setValue(45);
-		progressBar.setBounds(15, 505, 146, 20);
-		add(progressBar);
+		labelCriterio = new JLabel(new ImageIcon(RUTA+"palabraclave.png"));
+		labelCriterio.setBounds(6, 107, 328, 38);
+		add(labelCriterio);
 
 	}
 

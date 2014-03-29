@@ -54,6 +54,8 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		comprimido=null;
 		exploraciones=new ArbolBinAVL<Query>();
 		categorias=new ArbolBinAVL<Categoria>();
+		Categoria todas=new Categoria("Todos", "Todos los recursos del indice");
+		categorias.agregar(todas);
 		enlaces=new Lista<String>();
 		engine=new Engine();
 		indice=new ArbolBinAVL<Resource>();
@@ -296,6 +298,7 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 			j++;
 		}
 		return tempIndice;
+		
 	}
 	
 	

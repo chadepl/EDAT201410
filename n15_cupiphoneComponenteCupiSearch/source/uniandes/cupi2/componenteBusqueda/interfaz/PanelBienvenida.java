@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -23,61 +24,58 @@ public class PanelBienvenida extends JPanel implements ActionListener{
 		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
-		JLabel lblBienvenidoA = new JLabel("BIENVENIDO A...");
-		lblBienvenidoA.setBounds(45, 19, 138, 16);
-		add(lblBienvenidoA);
-		
-		JLabel lblCupisearch = new JLabel("CUPISEARCH");
-		lblCupisearch.setBounds(150, 47, 124, 16);
-		add(lblCupisearch);
-		
-		JButton btnZonaExploracion = new JButton("Zona Exploracion");
+		JButton btnZonaExploracion = new JButton("Exploracion");
+		ImageIcon image=new ImageIcon("./data/imagenes/config.png");
+		btnZonaExploracion.setIcon(image);
 		btnZonaExploracion.addActionListener(this);
 		btnZonaExploracion.setActionCommand("explorar");
-		btnZonaExploracion.setBounds(83, 75, 163, 29);
+		btnZonaExploracion.setBounds(0, 137, 161, 75);
 		add(btnZonaExploracion);
 		
-		JButton btnZonaBusqueda = new JButton("Zona Busqueda");
+		JButton btnZonaBusqueda = new JButton("Busqueda");
+		ImageIcon image1=new ImageIcon("./data/imagenes/busqueda.png");
+		btnZonaBusqueda.setIcon(image1);
 		btnZonaBusqueda.addActionListener(this);
 		btnZonaBusqueda.setActionCommand("buscar");
-		btnZonaBusqueda.setBounds(83, 116, 163, 29);
+		btnZonaBusqueda.setBounds(165, 137, 169, 75);
 		add(btnZonaBusqueda);
 		
-		JButton btnHistorialDeExploraciones = new JButton("Historial de Exploraciones");
-		btnHistorialDeExploraciones.addActionListener(this);
-		btnHistorialDeExploraciones.setActionCommand("historial");
-		btnHistorialDeExploraciones.setBounds(74, 198, 200, 29);
-		add(btnHistorialDeExploraciones);
-		
 		JButton btnAyuda = new JButton("Ayuda");
+		ImageIcon image2=new ImageIcon("./data/imagenes/ayuda.png");
+		btnAyuda.setIcon(image2);
+		btnAyuda.setPreferredSize(new Dimension(175, 75));
 		btnAyuda.addActionListener(this);
 		btnAyuda.setActionCommand("ayuda");
-		btnAyuda.setBounds(108, 239, 117, 29);
+		btnAyuda.setBounds(0, 369, 173, 75);
 		add(btnAyuda);
 		
 		JButton btnAcercaDe = new JButton("Acerca De");
+		ImageIcon imagen3=new ImageIcon("./data/imagenes/acercade.png");
+		btnAcercaDe.setIcon(imagen3);
 		btnAcercaDe.addActionListener(this);
 		btnAcercaDe.setActionCommand("acerca");
-		btnAcercaDe.setBounds(108, 280, 117, 29);
+		btnAcercaDe.setBounds(171, 369, 169, 75);
 		add(btnAcercaDe);
 		
-		JButton btnEstadisticasExploracion = new JButton("Estadisticas Exploracion");
+		JButton btnEstadisticasExploracion = new JButton("Exploraciones");
+		ImageIcon image4=new ImageIcon("./data/imagenes/exploraciones.png");
+		btnEstadisticasExploracion.setIcon(image4);
 		btnEstadisticasExploracion.addActionListener(this);
 		btnEstadisticasExploracion.setActionCommand("estadisticas");
-		btnEstadisticasExploracion.setBounds(58, 321, 216, 29);
+		btnEstadisticasExploracion.setBounds(0, 289, 340, 75);
 		add(btnEstadisticasExploracion);
 		
 		JButton btnCategorias = new JButton("Categorias");
+		ImageIcon image5=new ImageIcon("./data/imagenes/categorias.png");
+		btnCategorias.setIcon(image5);
 		btnCategorias.addActionListener(this);
 		btnCategorias.setActionCommand("categorias");
-		btnCategorias.setBounds(108, 157, 117, 29);
+		btnCategorias.setBounds(0, 213, 340, 75);
 		add(btnCategorias);
 		
-		JButton btnRecursos = new JButton("Recursos");
-		btnRecursos.addActionListener(this);
-		btnRecursos.setActionCommand("recursos");
-		btnRecursos.setBounds(108, 362, 117, 29);
-		add(btnRecursos);
+		JLabel lblCupisearch = new JLabel(new ImageIcon("./data/imagenes/cupiphone.png"));
+		lblCupisearch.setBounds(6, 6, 328, 134);
+		add(lblCupisearch);
 
 	}
 
@@ -100,8 +98,6 @@ public class PanelBienvenida extends JPanel implements ActionListener{
 			principal.darHistorial();
 		}else if(comando.equals("categorias")){
 			principal.mostrarCategorias();
-		}else if(comando.equals("recursos")){
-			principal.mostrarRecursos();
 		}
 		
 	}

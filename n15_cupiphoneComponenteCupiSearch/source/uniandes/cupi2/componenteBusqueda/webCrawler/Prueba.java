@@ -19,9 +19,10 @@ public class Prueba {
 
 		try{
 		Engine motor=new Engine();
-		String[] sources={"http://en.wikipedia.org/wiki/Main_Page","http://www.piccsy.com/","http://www.pinterest.com/","http://www.deviantart.com/","http://www.techcrunch.com/"};
+		String[] sources={"http://en.wikipedia.org/wiki/Main_Page","http://www.piccsy.com/","http://www.deviantart.com/"};
 		//String[] sources={"http://www.piccsy.com/"};
-		Query busqueda=motor.explore(sources, 1);
+//		Query busqueda=motor.explore(sources, 1);
+		Query busqueda=motor.explore(sources, 5);
 		System.out.println("");
 		
 

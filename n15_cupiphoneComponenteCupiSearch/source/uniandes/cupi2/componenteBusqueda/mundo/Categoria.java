@@ -81,5 +81,10 @@ public class Categoria implements Comparable<Categoria>{
 		return 0;
 	}
 	
+	@Override
+	public String toString() {
+		return nombre;
+	}
+	
 	
 }

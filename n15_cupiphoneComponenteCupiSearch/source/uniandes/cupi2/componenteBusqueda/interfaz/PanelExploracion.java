@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -15,16 +16,19 @@ import javax.swing.JList;
 
 public class PanelExploracion extends JPanel implements ActionListener {
 	private JTextField textField;
-	private JButton btnDudas;
 	private JButton btnVolver;
 	private JButton btnIniciarExploracion;
 	private JList listaSitiosFuente;
 	private JButton btnAnadirSitio;
+	private final static String RUTA="./data/imagenes/";
 	
 	private ComponenteBusquedaPanel principal;
 	
 	private DefaultListModel<String> model;
+	private JTextField txtProfundidad;
 
+	//Color usado: 75C048
+	
 	/**
 	 * Create the panel.
 	 */
@@ -33,43 +37,50 @@ public class PanelExploracion extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
-		JLabel lblZonaExploracion = new JLabel("ZONA EXPLORACION");
-		lblZonaExploracion.setBounds(38, 50, 169, 16);
+		JLabel lblZonaExploracion = new JLabel(new ImageIcon(RUTA+"explorar.png"));
+		lblZonaExploracion.setBounds(0, 6, 334, 95);
 		add(lblZonaExploracion);
 		
-		textField = new JTextField("");
-		textField.setBounds(38, 78, 254, 28);
+		textField = new JTextField("http://");
+		textField.setBounds(0, 102, 340, 28);
 		add(textField);
 		textField.setColumns(10);
 		
-		btnAnadirSitio = new JButton("A\u00F1adir a Sitios Fuente");
+		btnAnadirSitio = new JButton("");
+		ImageIcon imagen=new ImageIcon(RUTA+"anadir.png");
+		btnAnadirSitio.setIcon(imagen);
 		btnAnadirSitio.addActionListener(this);
 		btnAnadirSitio.setActionCommand("ANADIR");
-		btnAnadirSitio.setBounds(73, 131, 181, 29);
+		btnAnadirSitio.setBounds(0, 131, 334, 70);
 		add(btnAnadirSitio);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 172, 254, 124);
+		scrollPane.setBounds(0, 199, 334, 151);
 		add(scrollPane);
 		
 		listaSitiosFuente = new JList();
 		scrollPane.setViewportView(listaSitiosFuente);
 		
-		btnIniciarExploracion = new JButton("Iniciar Exploracion");
+		btnIniciarExploracion = new JButton("");
+		ImageIcon imagen1=new ImageIcon(RUTA+"iniciar.png");
+		btnIniciarExploracion.setIcon(imagen1);
 		btnIniciarExploracion.addActionListener(this);
 		btnIniciarExploracion.setActionCommand("INICIAR");
-		btnIniciarExploracion.setBounds(93, 319, 161, 29);
+		btnIniciarExploracion.setBounds(0, 351, 287, 70);
 		add(btnIniciarExploracion);
 		
-		btnVolver = new JButton("<-");
+		btnVolver = new JButton("");
+		ImageIcon imagen2=new ImageIcon(RUTA+"volver.png");
+		btnVolver.setIcon(imagen2);
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("VOLVER");
-		btnVolver.setBounds(277, 369, 37, 29);
+		btnVolver.setBounds(0, 421, 334, 23);
 		add(btnVolver);
 		
-		btnDudas = new JButton("?");
-		btnDudas.setBounds(17, 369, 31, 29);
-		add(btnDudas);
+		txtProfundidad = new JTextField();
+		txtProfundidad.setBounds(286, 350, 48, 70);
+		add(txtProfundidad);
+		txtProfundidad.setColumns(10);
 
 	}
 	
@@ -90,8 +101,10 @@ public class PanelExploracion extends JPanel implements ActionListener {
 		if(comando.equals("ANADIR")){
 			principal.anadirSitio(textField.getText());
 			actualizarLista(principal.darMundo().darArregloSitios());
+			textField.setText("http://");
 		}else if(comando.equals("INICIAR")){
-			principal.iniciarExploracion(1);
+			int profundidad=Integer.parseInt(txtProfundidad.getText());
+			principal.iniciarExploracion(profundidad);
 		}else if(comando.equals("VOLVER")){
 			principal.volverDesdeExploracion();
 		}

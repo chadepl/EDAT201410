@@ -77,20 +77,14 @@ public class ComponenteBusquedaPanel extends JPanel {
 	
 	public void mostrarCategorias() {
 		remove(bienvenida);
-		//if(mundo.)
-		//Categoria[] arreglo=mundo.darArregloCategorias();
-		add(categorias= new PanelCategorias(this,null));
+		Categoria[] arreglo=mundo.darArregloCategorias();
+		add(categorias= new PanelCategorias(this,arreglo));
 		
 	}
 	
-	public void mostrarRecursos() {
-		remove(bienvenida);
-		//TODO
-		add(recursos= new PanelRecursos(this,null));
-	}
+	
 	
 	public void mostrarAgregar() {
-		// TODO Auto-generated method stub
 		remove(categorias);
 		add(agregar=new PanelAgregarCategoria(this));
 	}
@@ -129,7 +123,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 		
 	}
 	
-	private void agregarCategoria(String nombre,String descripcion){
+	public void agregarCategoria(String nombre,String descripcion){
 		mundo.crearCategoria(nombre, descripcion);
 		remove(agregar);
 		Categoria[] arreglo=mundo.darArregloCategorias();

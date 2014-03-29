@@ -7,11 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JList;
 
 import uniandes.cupi2.componenteBusqueda.webCrawler.Resource;
+
+import javax.swing.JLabel;
 
 
 
@@ -20,6 +23,7 @@ public class PanelRecursos extends JPanel implements ActionListener{
 	private ComponenteBusquedaPanel principal;
 	private Resource[] recursos;
 	private JList listaRecursos;
+	private final static String RUTA="./data/imagenes/";
 	
 	private DefaultListModel<Resource> model;
 
@@ -27,25 +31,33 @@ public class PanelRecursos extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public PanelRecursos(ComponenteBusquedaPanel ventana,Resource[] nRecursos) {
+		setPreferredSize(new Dimension(340, 450));
+		setMinimumSize(new Dimension(340, 450));
 		
 		principal=ventana;
 		recursos=nRecursos;
-		
-		setPreferredSize(new Dimension(330, 540));
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 23, 287, 440);
+		scrollPane.setBounds(0, 100, 334, 317);
 		add(scrollPane);
 		
 		listaRecursos = new JList();
 		scrollPane.setViewportView(listaRecursos);
 		
-		JButton btnVolver = new JButton("<-");
+		JButton btnVolver = new JButton();
+		ImageIcon imagen=new ImageIcon(RUTA+"volver.png");
+		btnVolver.setIcon(imagen);
+		btnVolver.setPreferredSize(new Dimension(350, 30));
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("volver");
-		btnVolver.setBounds(144, 475, 39, 29);
+		btnVolver.setBounds(10, 414, 324, 18);
 		add(btnVolver);
+		
+		JLabel label = new JLabel(new ImageIcon(RUTA+"recursos.png"));
+		label.setPreferredSize(new Dimension(350, 100));
+		label.setBounds(0, 6, 334, 94);
+		add(label);
 		
 		actualizar(recursos);
 

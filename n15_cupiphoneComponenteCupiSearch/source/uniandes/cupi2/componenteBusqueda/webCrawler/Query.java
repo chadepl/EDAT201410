@@ -31,7 +31,8 @@ public class Query implements Comparable<Query>{
 	public Query(String[] sources,int nDepth) throws Exception{
 		depth=nDepth;
 		resources=new Lista<Resource>();
-		explore(sources, nDepth);
+		//explore(sources, nDepth);
+		explorarRecursivo(sources, nDepth*1000, 0);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		System.out.println(dateFormat.format(date));
@@ -74,8 +75,9 @@ public class Query implements Comparable<Query>{
 		}
 	}
 
-	public void explorarRecursivo(String[] sources, int inicial,int terminal,int tiempo){
+	public void explorarRecursivo(String[] sources,int limite,int transcurrido){
 		Lista<String> links=new Lista<String>();
+		long start=System.currentTimeMillis();
 		try{
 		for(String s: sources){
 		Document doc=Jsoup.connect(s).get();
@@ -84,24 +86,32 @@ public class Query implements Comparable<Query>{
 			if(e.tagName().equals("img")){
 				Resource recurso=new Resource(s, "img", e.attr("src"));
 				resources.agregar(recurso);
+				System.out.println(recurso.toString());
 			}
 			if(e.tagName().equals("a")){
 				Resource recurso=new Resource(s, "a", e.attr("href"));
 				resources.agregar(recurso);
 				links.agregar(recurso.getUrl());
+				System.out.println(recurso.toString());
 				
 			}
 			if(e.tagName().matches("h[1-7]")){
 				Resource recurso=new Resource(s, e.tagName() , e.text());
 				resources.agregar(recurso);
+				System.out.println(recurso.toString());
 			}
 			
 		}
-		
 		}
+		long terminar=System.currentTimeMillis();
+		transcurrido+=terminar-start;
+		System.out.println(transcurrido);
+		if(transcurrido<=limite)
+		explorarRecursivo(darArreglo(links),limite,transcurrido);
 		}catch(Exception e){
 			
 		}
+		
 		
 	}
 	

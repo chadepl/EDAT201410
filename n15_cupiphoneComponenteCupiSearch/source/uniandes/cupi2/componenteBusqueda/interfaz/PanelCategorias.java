@@ -73,6 +73,10 @@ public class PanelCategorias extends JPanel implements ActionListener{
 		button.setActionCommand("VOLVER");
 		button.setBounds(296, 505, 34, 29);
 		add(button);
+		
+		
+		actualizar(categorias);
+		
 
 	}
 	
