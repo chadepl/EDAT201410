@@ -15,6 +15,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 
 	
 	
+	
 	public static void main(String[] args) {
 		JFrame frim=new JFrame();
 		frim.setSize(new Dimension(330,540));
@@ -34,7 +35,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 	private PanelRecursos recursos;
 	private PanelAgregarCategoria agregar;
 	
-	
+	private String ruta;
 	
 	/**
 	 * Create the panel.
@@ -47,6 +48,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 		}
 		
 		
+		ruta=mundo.darRuta();
 		
 		setPreferredSize(new Dimension(330, 540));
 		
@@ -156,7 +158,9 @@ public class ComponenteBusquedaPanel extends JPanel {
 	}
 
 	
-
+	public String darRuta(){
+		return ruta;
+	}
 	
 
 	

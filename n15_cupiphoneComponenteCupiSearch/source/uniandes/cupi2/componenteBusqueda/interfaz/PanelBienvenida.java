@@ -25,7 +25,7 @@ public class PanelBienvenida extends JPanel implements ActionListener{
 		setLayout(null);
 		
 		JButton btnZonaExploracion = new JButton("Exploracion");
-		ImageIcon image=new ImageIcon("./data/imagenes/config.png");
+		ImageIcon image=new ImageIcon(principal.darRuta()+"config.png");
 		btnZonaExploracion.setIcon(image);
 		btnZonaExploracion.addActionListener(this);
 		btnZonaExploracion.setActionCommand("explorar");

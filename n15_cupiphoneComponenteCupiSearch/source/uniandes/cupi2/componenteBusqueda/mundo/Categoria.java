@@ -77,9 +77,11 @@ public class Categoria implements Comparable<Categoria>{
 	 * Metodo que compara elementos de tipo categoria.
 	 */
 	public int compareTo(Categoria o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		if(nombre.compareTo(o.nombre)>0)
+	return 1;
+else 
+	return -1;
+}
 	
 	@Override
 	public String toString() {

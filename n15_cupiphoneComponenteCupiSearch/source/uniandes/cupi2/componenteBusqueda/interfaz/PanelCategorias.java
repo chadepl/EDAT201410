@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ public class PanelCategorias extends JPanel implements ActionListener{
 	private ComponenteBusquedaPanel principal;
 	
 	private DefaultListModel<Categoria> model;
+	
+	private final static String RUTA="./data/imagenes/";
 
 	/**
 	 * Create the panel.
@@ -31,47 +34,49 @@ public class PanelCategorias extends JPanel implements ActionListener{
 		
 		principal=ventana;
 		
-		setPreferredSize(new Dimension(330, 540));
+		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 64, 269, 176);
+		scrollPane.setBounds(0, 108, 340, 80);
 		add(scrollPane);
 		
 		listaCategorias = new JList();
 		scrollPane.setViewportView(listaCategorias);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(32, 300, 269, 176);
+		scrollPane_1.setBounds(0, 257, 340, 103);
 		add(scrollPane_1);
 		
 		listaRecursosXCategoria = new JList();
 		scrollPane_1.setViewportView(listaRecursosXCategoria);
 		
-		JLabel lblCategorias = new JLabel("CATEGORIAS");
-		lblCategorias.setBounds(32, 36, 116, 16);
+		JLabel lblCategorias = new JLabel(new ImageIcon(RUTA+"categorias1.png"));
+		lblCategorias.setBounds(4, 6, 326, 103);
 		add(lblCategorias);
 		
-		JLabel lblRecursos = new JLabel("RECURSOS");
-		lblRecursos.setBounds(32, 272, 88, 16);
-		add(lblRecursos);
-		
 		JButton btnNuevaCategoria = new JButton("Nueva Categoria");
+		ImageIcon image=new ImageIcon(RUTA+"anadir.png");
+		btnNuevaCategoria.setIcon(image);
 		btnNuevaCategoria.addActionListener(this);
 		btnNuevaCategoria.setActionCommand("NUEVA");
-		btnNuevaCategoria.setBounds(86, 241, 147, 29);
+		btnNuevaCategoria.setBounds(0, 190, 340, 70);
 		add(btnNuevaCategoria);
 		
 		JButton btnAadir = new JButton("ANADIR");
+		ImageIcon image2=new ImageIcon(RUTA+"anadir.png");
+		btnAadir.setIcon(image2);
 		btnAadir.addActionListener(this);
 		btnAadir.setActionCommand("anadir");
-		btnAadir.setBounds(116, 478, 117, 29);
+		btnAadir.setBounds(0, 356, 340, 70);
 		add(btnAadir);
 		
 		JButton button = new JButton("<-");
+		ImageIcon image3=new ImageIcon(RUTA+"volver.png");
+		button.setIcon(image3);
 		button.addActionListener(this);
 		button.setActionCommand("VOLVER");
-		button.setBounds(296, 505, 34, 29);
+		button.setBounds(0, 427, 340, 23);
 		add(button);
 		
 		

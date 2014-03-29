@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JButton;
@@ -24,6 +25,8 @@ public class PanelHistorial extends JPanel implements ActionListener {
 	
 	private DefaultListModel<Query> model;
 	private JList listHistorial;
+	
+	private final static String RUTA="./data/imagenes/";
 
 	/**
 	 * Create the panel.
@@ -37,20 +40,22 @@ public class PanelHistorial extends JPanel implements ActionListener {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 75, 328, 222);
+		scrollPane.setBounds(0, 102, 340, 325);
 		add(scrollPane);
 		
 		listHistorial = new JList();
 		scrollPane.setViewportView(listHistorial);
 		
 		JButton btnVolver = new JButton("<-");
+		ImageIcon imagen = new ImageIcon(RUTA+"volver.png");
+		btnVolver.setIcon(imagen);
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("volver");
-		btnVolver.setBounds(298, 378, 36, 29);
+		btnVolver.setBounds(0, 427, 340, 23);
 		add(btnVolver);
 		
-		JLabel lblHistorial = new JLabel("HISTORIAL");
-		lblHistorial.setBounds(119, 35, 94, 16);
+		JLabel lblHistorial = new JLabel(new ImageIcon(RUTA+"exploraciones1.png"));
+		lblHistorial.setBounds(0, 0, 340, 100);
 		add(lblHistorial);
 
 		actualizarLista(nHistorial);

@@ -38,6 +38,8 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	private IArbolBinAVL<Query> exploraciones;
 
 	private IArbolBinAVL<Categoria> categorias;
+	
+	private String ruta;
 
 	
 	
@@ -59,6 +61,13 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		enlaces=new Lista<String>();
 		engine=new Engine();
 		indice=new ArbolBinAVL<Resource>();
+		System.out.println(categorias.darPeso());
+		if(core==null){
+			ruta="./data/imagenes/";
+		}else{
+			ruta=core.darDirectorioDatos().getPath();
+			System.out.println(ruta);
+		}
 	}
 
 	/**
@@ -161,6 +170,11 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	public boolean crearCategoria(String nNombre, String nDescripcion){
 		Categoria temp=new Categoria(nNombre, nDescripcion);
 		boolean bool=categorias.agregar(temp);
+		System.out.println("Se agrego: "+temp);
+		//if(bool){
+			System.out.println("TRUE");
+			System.out.println(categorias.darPeso());
+		//}
 //		if(bool)rgstr.grabarCategoria(categorias.buscar(temp));
 		return bool;
 	}
@@ -240,14 +254,31 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	 * 
 	 */
 	@Override
-	public Iterator<Resource> consultarRecursos(String criterio) {
+	public Iterator<Resource> consultarRecursos(String palabraClave,String criterio1,String[] criterios) {
 		Lista<Resource> list=new Lista<Resource>();
 		Iterator<Resource> i=indice.iterator();
 		while(i.hasNext()){
 			Resource temp=i.next();
-			if(temp.toString().equals(criterio)){
-				list.agregar(temp);
+			if(palabraClave.equals(" ")){
+				if(temp.getTag().equals(criterios[0]) || temp.getTag().equals(criterios[1])){
+					list.agregar(temp);
+				}
+			}else{
+				if(criterio1.equals("igual")){
+					if((temp.getTag().equals(criterios[0]) || temp.getTag().equals(criterios[1]))&&temp.getThingTagged().equals(palabraClave)){
+						list.agregar(temp);
+					}
+				}else if(criterio1.equals("contiene")){
+					if((temp.getTag().equals(criterios[0]) || temp.getTag().equals(criterios[1]))&&temp.getThingTagged().contains(palabraClave)){
+						list.agregar(temp);
+					}
+				}else if(criterio1.equals("nocontiene")){
+					if((temp.getTag().equals(criterios[0]) || temp.getTag().equals(criterios[1]))&&!temp.getThingTagged().contains(palabraClave)){
+						list.agregar(temp);
+					}
+				}
 			}
+			
 		}
 		return list.iterator();
 	}
@@ -322,5 +353,11 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		return null;
 		
 	}
+	
+	public String darRuta(){
+		return ruta;
+	}
+	
+
 
 }
