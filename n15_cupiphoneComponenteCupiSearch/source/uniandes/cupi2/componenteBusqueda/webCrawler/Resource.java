@@ -1,9 +1,15 @@
 package uniandes.cupi2.componenteBusqueda.webCrawler;
+import java.io.Serializable;
 import java.net.URL;
 
 
-public class Resource implements Comparable<Resource>{
+public class Resource implements Comparable<Resource>,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String url;
 	
 	private String tag;

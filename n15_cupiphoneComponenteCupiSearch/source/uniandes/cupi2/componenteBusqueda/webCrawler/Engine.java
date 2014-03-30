@@ -1,5 +1,6 @@
 package uniandes.cupi2.componenteBusqueda.webCrawler;
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,7 +9,13 @@ import org.jsoup.select.Elements;
 import lista.Lista;
 
 
-public class Engine {
+public class Engine implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	private Lista<Query> history;
 	

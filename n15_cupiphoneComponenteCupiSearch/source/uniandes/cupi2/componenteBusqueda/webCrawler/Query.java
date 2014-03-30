@@ -1,4 +1,5 @@
 package uniandes.cupi2.componenteBusqueda.webCrawler;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +14,13 @@ import lista.Elemento;
 import lista.Lista;
 
 
-public class Query implements Comparable<Query>{
+public class Query implements Comparable<Query>,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Date time;
 	
 	private Lista<Resource> resources;
@@ -31,8 +37,8 @@ public class Query implements Comparable<Query>{
 	public Query(String[] sources,int nDepth) throws Exception{
 		depth=nDepth;
 		resources=new Lista<Resource>();
-		//explore(sources, nDepth);
-		explorarRecursivo(sources, nDepth*1000, 0);
+		explorarRecursivo2(crearListaRecursos(sources),nDepth*1000,0);
+		//explorarRecursivo(sources, nDepth*1000, 0);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		System.out.println(dateFormat.format(date));
@@ -41,50 +47,85 @@ public class Query implements Comparable<Query>{
 	}
 	
 	
-	public void explore(String[] sources, int depth) throws Exception{
-		for(int i=0;i<sources.length;i++){
+
+	private void explorarRecursivo2(Lista<String> indice, int limite,
+			int transcurrido) {
+		// TODO Auto-generated method stub
 		try{
-		Document doc=Jsoup.connect(sources[i]).get();
-		Elements el=doc.select("h[1-7]");
-		Elements el1=doc.select("img");
-		Elements el2=doc.select("a");
-		Elements el4=doc.select("title");
-		for(Element actual:el){
-			String thingt=actual.text();
-			System.out.println("h2: "+thingt);
-			resources.agregar(new Resource(sources[i], "h2", thingt));
-		}
-		for(Element actual:el1){
-			String thingt=actual.attr("src");
-			System.out.println("img: "+thingt);
-			resources.agregar(new Resource(sources[i], "img", thingt));
-		}
-		for(Element actual:el2){
-			String thingt=actual.attr("href");
-			System.out.println("a: "+thingt);
-			resources.agregar(new Resource(sources[i], "a", thingt));
-		}
-		for(Element actual:el4){
-			String thingt=actual.text();
-			System.out.println("title: "+thingt);
-			resources.agregar(new Resource(sources[i], "title", thingt));
+		long start=System.currentTimeMillis();
+		String s=indice.eliminar(0);
+		Document doc=Jsoup.connect(s).get();
+		Elements es=doc.getAllElements();
+		for(Element e:es){
+			if(e.tagName().equals("img")){
+				Resource recurso=null;
+				if(e.attr("src").startsWith("http://") || e.attr("src").startsWith("https://"))
+				recurso=new Resource(s, "img", e.attr("src"));
+				else if(e.attr("src").startsWith("//"))
+				recurso=new Resource(s, "img", "http:"+e.attr("src"));
+				else
+				recurso=new Resource(s, "img", "http:/"+e.attr("src"));
+				resources.agregar(recurso);
+				System.out.println(recurso.toString());
+			}
+			if(e.tagName().equals("a")){
+				Resource recurso=new Resource(s, "a", e.attr("href"));
+				resources.agregar(recurso);
+				indice.agregar(recurso.getUrl());
+				System.out.println(recurso.toString());
+				
+			}
+			if(e.tagName().matches("h[1-7]")){
+				Resource recurso=new Resource(s, e.tagName() , e.text());
+				resources.agregar(recurso);
+				System.out.println(recurso.toString());
+			}
+			
+			long terminar=System.currentTimeMillis();
+			transcurrido+=terminar-start;
+			System.out.println(transcurrido);
+			if(transcurrido<=limite)
+				explorarRecursivo2(indice, limite, transcurrido);
+			
+		
 		}
 		}catch(Exception e){
-			System.out.println("No se pudo leer el sitio");
+			
 		}
-		}
+		
 	}
+
+
+
+	private Lista<String> crearListaRecursos(String[] sources) {
+		// TODO Auto-generated method stub
+		Lista<String> indice=new Lista<String>();
+		for(int i=0;i<sources.length;i++){
+			indice.agregar(sources[i]);
+		}
+		return indice;
+		
+	}
+
+
 
 	public void explorarRecursivo(String[] sources,int limite,int transcurrido){
 		Lista<String> links=new Lista<String>();
 		long start=System.currentTimeMillis();
 		try{
 		for(String s: sources){
+		long start1=System.currentTimeMillis();
 		Document doc=Jsoup.connect(s).get();
 		Elements es=doc.getAllElements();
 		for(Element e:es){
 			if(e.tagName().equals("img")){
-				Resource recurso=new Resource(s, "img", e.attr("src"));
+				Resource recurso=null;
+				if(e.attr("src").startsWith("http://") || e.attr("src").startsWith("https://"))
+				recurso=new Resource(s, "img", e.attr("src"));
+				else if(e.attr("src").startsWith("//"))
+				recurso=new Resource(s, "img", "http:"+e.attr("src"));
+				else
+				recurso=new Resource(s, "img", "http:/"+e.attr("src"));
 				resources.agregar(recurso);
 				System.out.println(recurso.toString());
 			}
@@ -101,6 +142,10 @@ public class Query implements Comparable<Query>{
 				System.out.println(recurso.toString());
 			}
 			
+			long terminar=System.currentTimeMillis();
+			transcurrido+=terminar-start1;
+			System.out.println(transcurrido);
+			
 		}
 		}
 		long terminar=System.currentTimeMillis();
@@ -114,27 +159,6 @@ public class Query implements Comparable<Query>{
 		
 		
 	}
-	
-	/**
-	 * 
-	 * @param sources
-	 * @param depth
-	 */
-//	public void explorarRecursivo(String[] sources,int depth) {
-//		try{
-//		long start=System.currentTimeMillis();
-//		for(int i=0;i<sources.length;i++){
-//			Document doc=Jsoup.connect(sources[i]).get();
-//			Elements e=doc.getAllElements();
-//			for(Element elemento:e){
-//				
-//		//		Resource recurso=new Resource(source[i], elemento.id(), nThingTagged)
-//			}
-//		}
-//		
-//		}catch(Exception e){}
-//
-//	}
 	
 	
 	private String[] darArreglo(Lista<String> cadena){

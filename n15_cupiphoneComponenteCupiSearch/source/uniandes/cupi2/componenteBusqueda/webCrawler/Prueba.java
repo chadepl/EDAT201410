@@ -22,7 +22,7 @@ public class Prueba {
 		String[] sources={"http://en.wikipedia.org/wiki/Main_Page","http://www.piccsy.com/","http://www.deviantart.com/"};
 		//String[] sources={"http://www.piccsy.com/"};
 //		Query busqueda=motor.explore(sources, 1);
-		Query busqueda=motor.explore(sources, 5);
+		Query busqueda=motor.explore(sources, 7);
 		System.out.println("");
 		
 
