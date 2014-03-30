@@ -34,6 +34,7 @@ public class ComponenteBusquedaPanel extends JPanel {
 	private PanelCategorias categorias;
 	private PanelRecursos recursos;
 	private PanelAgregarCategoria agregar;
+	private PanelMostrarRecurso resultado;
 	
 	private String ruta;
 	
@@ -119,6 +120,12 @@ public class ComponenteBusquedaPanel extends JPanel {
 		add(bienvenida=new PanelBienvenida(this));
 	}
 	
+	public void volverDesdeMostrarRecursos() {
+		// TODO Auto-generated method stub
+		remove(resultado);
+		add(bienvenida=new PanelBienvenida(this));
+	}
+	
 	public void darHistorial() {
 		remove(bienvenida);
 		add(historial = new PanelHistorial(this,mundo.darHistorialExploraciones2()));
@@ -161,6 +168,21 @@ public class ComponenteBusquedaPanel extends JPanel {
 	public String darRuta(){
 		return ruta;
 	}
+
+	public Resource[] darRecursosXCategoria(Categoria selectedValue) {
+		// TODO Auto-generated method stub
+		
+		return mundo.darRecursosXCategoria(selectedValue);
+		
+	}
+
+	public void mostrarRescurso(String thingTagged) {
+		remove(categorias);
+		add(resultado=new PanelMostrarRecurso(this,thingTagged));
+		
+	}
+
+	
 	
 
 	

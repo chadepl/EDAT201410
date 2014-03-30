@@ -2,7 +2,10 @@ package uniandes.cupi2.componenteBusqueda.mundo;
 
 
 
+import java.util.Iterator;
+
 import uniandes.cupi2.componenteBusqueda.webCrawler.Resource;
+import arbolBinAVL.ArbolBinAVL;
 import arbolBinAVL.IArbolBinAVL;
 
 public class Categoria implements Comparable<Categoria>{
@@ -28,6 +31,7 @@ public class Categoria implements Comparable<Categoria>{
 	public Categoria(String nNombre, String nDescripcion){
 		nombre=nNombre;
 		descripcion=nDescripcion;
+		recursos= new ArbolBinAVL<Resource>();
 	}
 	
 	/**
@@ -77,16 +81,32 @@ public class Categoria implements Comparable<Categoria>{
 	 * Metodo que compara elementos de tipo categoria.
 	 */
 	public int compareTo(Categoria o) {
-		if(nombre.compareTo(o.nombre)>0)
-	return 1;
-else 
-	return -1;
-}
+		if (nombre.compareTo(o.nombre) > 0)
+			return 1;
+		else if (nombre.compareTo(o.nombre) < 0)
+			return -1;
+		else
+			return 0;
+	}
 	
 	@Override
 	public String toString() {
 		return nombre;
 	}
+	
+	public Resource[] darRecursos(){
+		recursos.agregar(new Resource("URL", "Tag", "Que es"));
+		Iterator<Resource> i=recursos.iterator();
+		Resource[] tempIndice=new Resource[recursos.darPeso()];
+		int j=0;
+		while(i.hasNext()){
+			Resource temp=i.next();
+			tempIndice[j]=temp;
+			j++;
+		}
+		return tempIndice;
+	}
+		
 	
 	
 }

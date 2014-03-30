@@ -40,6 +40,8 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	private IArbolBinAVL<Categoria> categorias;
 	
 	private String ruta;
+	
+	private Categoria todas;
 
 	
 	
@@ -56,7 +58,7 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		comprimido=null;
 		exploraciones=new ArbolBinAVL<Query>();
 		categorias=new ArbolBinAVL<Categoria>();
-		Categoria todas=new Categoria("Todos", "Todos los recursos del indice");
+		todas=new Categoria("Todos", "Todos los recursos del indice");
 		categorias.agregar(todas);
 		enlaces=new Lista<String>();
 		engine=new Engine();
@@ -113,7 +115,18 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 			indice.agregar(temp);
 		}
 		exploraciones.agregar(tempQuery);
+		poblarTodas(indice);
 		enlaces.clear();
+	}
+	
+	public void poblarTodas(IArbolBinAVL<Resource> indice){
+		indice.agregar(new Resource("URL", "Tag", "Que es"));
+		Iterator<Resource> iterador=indice.iterator();
+		while(iterador.hasNext()){
+			Resource temp=iterador.next();
+			todas.agregarRecurso(temp);
+			System.out.println(todas.buscarRecurso(temp).toString());
+		}
 	}
 
 	/**
@@ -356,6 +369,13 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	
 	public String darRuta(){
 		return ruta;
+	}
+
+	public Resource[] darRecursosXCategoria(Categoria buscada) {
+		// TODO Auto-generated method stub
+		System.out.println(categorias.buscar(buscada).toString());
+		System.out.println(categorias.buscar(buscada).darRecursos().length);
+		return categorias.buscar(buscada).darRecursos();
 	}
 	
 

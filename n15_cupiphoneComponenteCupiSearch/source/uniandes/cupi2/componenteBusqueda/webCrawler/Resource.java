@@ -51,8 +51,10 @@ public class Resource implements Comparable<Resource>{
 	public int compareTo(Resource o) {
 				if(thingTagged.compareTo(o.thingTagged)>0)
 			return 1;
-		else 
+		else if(thingTagged.compareTo(o.thingTagged)<0)
 			return -1;
+		else
+			return 0;
 	}
 	
 	@Override

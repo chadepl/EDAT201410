@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import uniandes.cupi2.componenteBusqueda.mundo.Categoria;
+import uniandes.cupi2.componenteBusqueda.webCrawler.Resource;
 
 public class PanelCategorias extends JPanel implements ActionListener{
 	
@@ -24,6 +27,8 @@ public class PanelCategorias extends JPanel implements ActionListener{
 	private ComponenteBusquedaPanel principal;
 	
 	private DefaultListModel<Categoria> model;
+	
+	private DefaultListModel<Resource> model1;
 	
 	private final static String RUTA="./data/imagenes/";
 
@@ -44,12 +49,34 @@ public class PanelCategorias extends JPanel implements ActionListener{
 		listaCategorias = new JList();
 		scrollPane.setViewportView(listaCategorias);
 		
+		listaCategorias.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt){
+				JList list=(JList)evt.getSource();
+				if(evt.getClickCount()==2){
+					actualizarRecursos(principal.darRecursosXCategoria((Categoria)list.getSelectedValue()));
+				}
+				
+			}
+		});
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(0, 257, 340, 103);
 		add(scrollPane_1);
 		
 		listaRecursosXCategoria = new JList();
 		scrollPane_1.setViewportView(listaRecursosXCategoria);
+		
+		listaRecursosXCategoria.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt){
+				JList list=(JList)evt.getSource();
+				if(evt.getClickCount()==2){
+					//mostrarDialogo((Colegio) list.getSelectedValue());
+					Resource recurso=(Resource) list.getSelectedValue();
+					principal.mostrarRescurso(recurso.getThingTagged());
+				}
+				
+			}
+		});
 		
 		JLabel lblCategorias = new JLabel(new ImageIcon(RUTA+"categorias1.png"));
 		lblCategorias.setBounds(4, 6, 326, 103);
@@ -80,12 +107,12 @@ public class PanelCategorias extends JPanel implements ActionListener{
 		add(button);
 		
 		
-		actualizar(categorias);
+		actualizarCategorias(categorias);
 		
 
 	}
 	
-	private void actualizar(Categoria[] categorias) {
+	private void actualizarCategorias(Categoria[] categorias) {
 		
 		model = new DefaultListModel<Categoria>();
 		    for(Categoria s : categorias){
@@ -93,6 +120,16 @@ public class PanelCategorias extends JPanel implements ActionListener{
 		    }    
 		    listaCategorias.setModel(model);     
 		    listaCategorias.setSelectedIndex(0);
+	}
+	
+	private void actualizarRecursos(Resource[] recursos) {
+		
+		model1 = new DefaultListModel<Resource>();
+		    for(Resource r : recursos){
+		         model1.addElement(r);
+		    }    
+		    listaRecursosXCategoria.setModel(model1);     
+		    listaRecursosXCategoria.setSelectedIndex(0);
 	}
 
 	@Override
