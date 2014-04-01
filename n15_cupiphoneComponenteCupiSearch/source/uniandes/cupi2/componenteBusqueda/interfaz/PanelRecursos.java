@@ -23,7 +23,8 @@ public class PanelRecursos extends JPanel implements ActionListener{
 	private ComponenteBusquedaPanel principal;
 	private Resource[] recursos;
 	private JList listaRecursos;
-	private final static String RUTA="./data/imagenes/";
+	
+	private String ruta;
 	
 	private DefaultListModel<Resource> model;
 
@@ -35,6 +36,7 @@ public class PanelRecursos extends JPanel implements ActionListener{
 		setMinimumSize(new Dimension(340, 450));
 		
 		principal=ventana;
+		ruta=principal.darRuta();
 		recursos=nRecursos;
 		setLayout(null);
 		
@@ -46,7 +48,7 @@ public class PanelRecursos extends JPanel implements ActionListener{
 		scrollPane.setViewportView(listaRecursos);
 		
 		JButton btnVolver = new JButton();
-		ImageIcon imagen=new ImageIcon(RUTA+"volver.png");
+		ImageIcon imagen=new ImageIcon(ruta+"volver.png");
 		btnVolver.setIcon(imagen);
 		btnVolver.setPreferredSize(new Dimension(350, 30));
 		btnVolver.addActionListener(this);
@@ -54,7 +56,7 @@ public class PanelRecursos extends JPanel implements ActionListener{
 		btnVolver.setBounds(10, 414, 324, 18);
 		add(btnVolver);
 		
-		JLabel label = new JLabel(new ImageIcon(RUTA+"recursos.png"));
+		JLabel label = new JLabel(new ImageIcon(ruta+"recursos.png"));
 		label.setPreferredSize(new Dimension(350, 100));
 		label.setBounds(0, 6, 334, 94);
 		add(label);

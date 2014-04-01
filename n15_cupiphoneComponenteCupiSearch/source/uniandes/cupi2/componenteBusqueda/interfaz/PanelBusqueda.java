@@ -25,7 +25,8 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 	private JRadioButton rdbtnIgual;
 	private JRadioButton rdbtnIncluye;
 	private JRadioButton rdbtnNoIncluye;
-	private final static String RUTA="./data/imagenes/";
+	
+	private String ruta;
 	
 	private ButtonGroup grupo;
 	
@@ -38,10 +39,11 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 	 */
 	public PanelBusqueda(ComponenteBusquedaPanel ventana) {
 		principal=ventana;
+		ruta=principal.darRuta();
 		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
-		JLabel lblZonaBusqueda = new JLabel(new ImageIcon(RUTA+"buscar.png"));
+		JLabel lblZonaBusqueda = new JLabel(new ImageIcon(ruta+"buscar.png"));
 		lblZonaBusqueda.setBounds(0, 6, 334, 108);
 		add(lblZonaBusqueda);
 		
@@ -85,7 +87,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 		add(separator);
 		
 		btnBuscar = new JButton();
-		ImageIcon imagen = new ImageIcon(RUTA+"btnbuscar.png");
+		ImageIcon imagen = new ImageIcon(ruta+"btnbuscar.png");
 		btnBuscar.setIcon(imagen);
 		btnBuscar.addActionListener(this);
 		btnBuscar.setActionCommand("buscar");
@@ -93,14 +95,14 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 		add(btnBuscar);
 		
 		btnVolver = new JButton();
-		ImageIcon imagen1 = new ImageIcon(RUTA+"volver.png");
+		ImageIcon imagen1 = new ImageIcon(ruta+"volver.png");
 		btnVolver.setIcon(imagen1);
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("volver");
 		btnVolver.setBounds(0, 373, 334, 29);
 		add(btnVolver);
 		
-		labelCriterio = new JLabel(new ImageIcon(RUTA+"palabraclave.png"));
+		labelCriterio = new JLabel(new ImageIcon(ruta+"palabraclave.png"));
 		labelCriterio.setBounds(6, 107, 328, 38);
 		add(labelCriterio);
 
@@ -108,17 +110,22 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
 		String comando=e.getActionCommand();
 		
 		
 		if(comando.equals("buscar")){
 			System.out.println(chckbxDocumentos.isSelected()?chckbxDocumentos.getActionCommand():"No hay nada");
-			System.out.println(grupo.getSelection().getActionCommand());
+			System.out.println(grupo.getSelection()!=null?grupo.getSelection().getActionCommand():"ERROR");
 			System.out.println(textField.getText());
+			String palabraClave=textField.getText();
+			String criterio=grupo.getSelection()!=null?grupo.getSelection().getActionCommand():"ERROR";
+			String[] criterios={chckbxDocumentos.isSelected()?chckbxDocumentos.getActionCommand():" ",
+					chckbxImagenes.isSelected()?chckbxImagenes.getActionCommand():" "};
+			principal.buscar(palabraClave,criterio,criterios);
 			
 		}else if(comando.equals("volver")){
-			
+			principal.volverDesdeBusqueda();
 		}
 		
 	}

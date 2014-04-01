@@ -34,25 +34,26 @@ public class ComponenteBusquedaPanel extends JPanel {
 	private PanelCategorias categorias;
 	private PanelRecursos recursos;
 	private PanelAgregarCategoria agregar;
-	private PanelMostrarRecurso resultado;
+	private PanelMostrarRecurso mostrarRecurso;
 	
 	private String ruta;
+	
+	private Resource[] respuesta;
 	
 	/**
 	 * Create the panel.
 	 */
 	public ComponenteBusquedaPanel(ComponenteBusqueda ventana) {
-		if(ventana!=null){
-			mundo=ventana;
-		}else{
-			mundo=new ComponenteBusqueda(null);	
+		if (ventana != null) {
+			mundo = ventana;
+		} else {
+			mundo = new ComponenteBusqueda(null);
 		}
-		
-		
-		ruta=mundo.darRuta();
-		
+
+		ruta = mundo.darRuta();
+
 		setPreferredSize(new Dimension(330, 540));
-		
+
 		bienvenida = new PanelBienvenida(this);
 		add(bienvenida);
 
@@ -66,6 +67,9 @@ public class ComponenteBusquedaPanel extends JPanel {
 	}
 	
 	
+	//////////////////////////////
+	//METODOS PARA MOSTRAR PANELES
+	//////////////////////////////
 	
 	public void mostrarExploracion(){
 		remove(bienvenida);
@@ -85,8 +89,6 @@ public class ComponenteBusquedaPanel extends JPanel {
 		
 	}
 	
-	
-	
 	public void mostrarAgregar() {
 		remove(categorias);
 		add(agregar=new PanelAgregarCategoria(this));
@@ -97,7 +99,16 @@ public class ComponenteBusquedaPanel extends JPanel {
 		Resource[] arreglo=mundo.darArregloIndice();
 		add(recursos= new PanelRecursos(this,arreglo));
 	}
+
+	public void mostrarBusquedaDesdeResultados(){
+		remove(resultados);
+		add(busqueda=new PanelBusqueda(this));
+	}
 	
+	
+	/////////////////////////////////
+	//METODOS PARA CAMBIAR DE PANELES
+	////////////////////////////////
 	
 	public void volverDesdeExploracion() {
 		remove(exploracion);
@@ -121,10 +132,22 @@ public class ComponenteBusquedaPanel extends JPanel {
 	}
 	
 	public void volverDesdeMostrarRecursos() {
-		// TODO Auto-generated method stub
-		remove(resultado);
+		remove(mostrarRecurso);
 		add(bienvenida=new PanelBienvenida(this));
 	}
+	
+	public void volverDesdeBusqueda() {
+		remove(busqueda);
+		add(bienvenida=new PanelBienvenida(this));
+	}
+	
+	public void volverDesdeResultados(){
+		remove(resultados);
+		add(busqueda = new PanelBusqueda(this));
+	}
+	
+	
+	////////////////////////////////////
 	
 	public void darHistorial() {
 		remove(bienvenida);
@@ -132,17 +155,27 @@ public class ComponenteBusquedaPanel extends JPanel {
 		
 	}
 	
-	public void agregarCategoria(String nombre,String descripcion){
-		mundo.crearCategoria(nombre, descripcion);
-		remove(agregar);
-		Categoria[] arreglo=mundo.darArregloCategorias();
-		add(categorias= new PanelCategorias(this,arreglo));
+	
+	
+	
+	public void mostrarRescurso(String thingTagged) {
+		remove(resultados);
+		add(mostrarRecurso=new PanelMostrarRecurso(this,thingTagged));
+		
 	}
 
+	
+
+	
+	//////////////////////////////////
+	//METODOS DE CONEXION CON EL MUNDO
+	/////////////////////////////////
+	
+	
 	public void anadirSitio(String text) {
 		mundo.agregarSitioFuente(text);
 	}
-
+	
 	public void iniciarExploracion(int i) {
 		try{
 		mundo.realizarExploracion(i);
@@ -151,41 +184,38 @@ public class ComponenteBusquedaPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "Problemas");
 		}
 	}
-
 	
-
+	public void buscar(String palabraClave, String criterio, String[] criterios) {
+		respuesta=mundo.consultarRecursos(palabraClave, criterio, criterios);
+		remove(busqueda);
+		add(resultados=new PanelResultadosBusqueda(this,respuesta));
+		
+	}
+	
 	public String darEstadisticas(String id) {
 		return mundo.darEstadisticasDeExploracion(id).toString();
 		
 	}
-
+	
+	public Resource[] darRecursosXCategoria(Categoria selectedValue) {
+		return mundo.darRecursosXCategoria(selectedValue);
+	}
 	
 	public ComponenteBusqueda darMundo(){
 		return mundo;
 	}
-
 	
+	public void agregarCategoria(String nombre,String descripcion){
+		mundo.crearCategoria(nombre, descripcion);
+		remove(agregar);
+		Categoria[] arreglo=mundo.darArregloCategorias();
+		add(categorias= new PanelCategorias(this,arreglo));
+	}
+	
+
 	public String darRuta(){
 		return ruta;
 	}
-
-	public Resource[] darRecursosXCategoria(Categoria selectedValue) {
-		// TODO Auto-generated method stub
-		
-		return mundo.darRecursosXCategoria(selectedValue);
-		
-	}
-
-	public void mostrarRescurso(String thingTagged) {
-		remove(categorias);
-		add(resultado=new PanelMostrarRecurso(this,thingTagged));
-		
-	}
-
-	
-	
-
-	
 
 	
 

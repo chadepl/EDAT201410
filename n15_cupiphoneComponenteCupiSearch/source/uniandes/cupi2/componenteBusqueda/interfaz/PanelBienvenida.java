@@ -16,65 +16,71 @@ public class PanelBienvenida extends JPanel implements ActionListener{
 	
 	private ComponenteBusquedaPanel principal;
 	
+	private String ruta;
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	public PanelBienvenida(ComponenteBusquedaPanel ventana) {
 		principal=ventana;
-		setPreferredSize(new Dimension(340, 450));
+		
+		ruta=principal.darRuta();
+		
+		setPreferredSize(new Dimension(320, 450));
 		setLayout(null);
 		
 		JButton btnZonaExploracion = new JButton("Exploracion");
-		ImageIcon image=new ImageIcon(principal.darRuta()+"config.png");
+		ImageIcon image=new ImageIcon(ruta+"config.png");
 		btnZonaExploracion.setIcon(image);
 		btnZonaExploracion.addActionListener(this);
 		btnZonaExploracion.setActionCommand("explorar");
-		btnZonaExploracion.setBounds(0, 137, 161, 75);
+		btnZonaExploracion.setBounds(0, 137, 152, 75);
 		add(btnZonaExploracion);
 		
 		JButton btnZonaBusqueda = new JButton("Busqueda");
-		ImageIcon image1=new ImageIcon("./data/imagenes/busqueda.png");
+		ImageIcon image1=new ImageIcon(ruta+"busqueda.png");
 		btnZonaBusqueda.setIcon(image1);
 		btnZonaBusqueda.addActionListener(this);
 		btnZonaBusqueda.setActionCommand("buscar");
-		btnZonaBusqueda.setBounds(165, 137, 169, 75);
+		btnZonaBusqueda.setBounds(155, 137, 169, 75);
 		add(btnZonaBusqueda);
 		
 		JButton btnAyuda = new JButton("Ayuda");
-		ImageIcon image2=new ImageIcon("./data/imagenes/ayuda.png");
+		ImageIcon image2=new ImageIcon(ruta+"ayuda.png");
 		btnAyuda.setIcon(image2);
-		btnAyuda.setPreferredSize(new Dimension(175, 75));
+		btnAyuda.setPreferredSize(new Dimension(170, 75));
 		btnAyuda.addActionListener(this);
 		btnAyuda.setActionCommand("ayuda");
-		btnAyuda.setBounds(0, 369, 173, 75);
+		btnAyuda.setBounds(-2, 369, 161, 75);
 		add(btnAyuda);
 		
 		JButton btnAcercaDe = new JButton("Acerca De");
-		ImageIcon imagen3=new ImageIcon("./data/imagenes/acercade.png");
+		ImageIcon imagen3=new ImageIcon(ruta+"acercade.png");
 		btnAcercaDe.setIcon(imagen3);
 		btnAcercaDe.addActionListener(this);
 		btnAcercaDe.setActionCommand("acerca");
-		btnAcercaDe.setBounds(171, 369, 169, 75);
+		btnAcercaDe.setBounds(161, 369, 169, 75);
 		add(btnAcercaDe);
 		
 		JButton btnEstadisticasExploracion = new JButton("Exploraciones");
-		ImageIcon image4=new ImageIcon("./data/imagenes/exploraciones.png");
+		ImageIcon image4=new ImageIcon(ruta+"exploraciones.png");
 		btnEstadisticasExploracion.setIcon(image4);
 		btnEstadisticasExploracion.addActionListener(this);
 		btnEstadisticasExploracion.setActionCommand("estadisticas");
-		btnEstadisticasExploracion.setBounds(0, 289, 340, 75);
+		btnEstadisticasExploracion.setBounds(0, 289, 324, 75);
 		add(btnEstadisticasExploracion);
 		
 		JButton btnCategorias = new JButton("Categorias");
-		ImageIcon image5=new ImageIcon("./data/imagenes/categorias.png");
+		ImageIcon image5=new ImageIcon(ruta+"categorias.png");
 		btnCategorias.setIcon(image5);
 		btnCategorias.addActionListener(this);
 		btnCategorias.setActionCommand("categorias");
-		btnCategorias.setBounds(0, 213, 340, 75);
+		btnCategorias.setBounds(0, 213, 324, 75);
 		add(btnCategorias);
 		
-		JLabel lblCupisearch = new JLabel(new ImageIcon("./data/imagenes/cupiphone.png"));
-		lblCupisearch.setBounds(6, 6, 328, 134);
+		JLabel lblCupisearch = new JLabel(new ImageIcon(ruta+"cupiphone.png"));
+		lblCupisearch.setBounds(0, 6, 324, 134);
 		add(lblCupisearch);
 
 	}

@@ -67,7 +67,7 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 		if(core==null){
 			ruta="./data/imagenes/";
 		}else{
-			ruta=core.darDirectorioDatos().getPath();
+			ruta=core.darDirectorioDatos().getPath()+"/imagenes/";
 			System.out.println(ruta);
 		}
 	}
@@ -267,7 +267,7 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 	 * 
 	 */
 	@Override
-	public Iterator<Resource> consultarRecursos(String palabraClave,String criterio1,String[] criterios) {
+	public Resource[] consultarRecursos(String palabraClave,String criterio1,String[] criterios) {
 		Lista<Resource> list=new Lista<Resource>();
 		Iterator<Resource> i=indice.iterator();
 		while(i.hasNext()){
@@ -293,9 +293,22 @@ public class ComponenteBusqueda implements IComponenteBusqueda{
 			}
 			
 		}
-		return list.iterator();
+		return generarArreglo(list);
 	}
 	
+	private Resource[] generarArreglo(Lista<Resource> list) {
+		// TODO Auto-generated method stub
+		Iterator<Resource> i=list.iterator();
+		Resource[] tempEnlaces=new Resource[list.darLongitud()];
+		int j=0;
+		while(i.hasNext()){
+			Resource temp=i.next();
+			tempEnlaces[j]=temp;
+			j++;
+		}
+		return tempEnlaces;
+	}
+
 	/**
 	 * 
 	 * @return

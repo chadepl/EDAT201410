@@ -42,7 +42,7 @@ public interface IComponenteBusqueda {
 	 * @param criterio
 	 * @return
 	 */
-	public Iterator<Resource> consultarRecursos(String palabraClave,String criterio1,String[] criterios);
+	public Resource[] consultarRecursos(String palabraClave,String criterio1,String[] criterios);
 	
 	/**
 	 * 

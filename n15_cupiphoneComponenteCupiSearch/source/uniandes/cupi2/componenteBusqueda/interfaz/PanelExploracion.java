@@ -20,7 +20,8 @@ public class PanelExploracion extends JPanel implements ActionListener {
 	private JButton btnIniciarExploracion;
 	private JList listaSitiosFuente;
 	private JButton btnAnadirSitio;
-	private final static String RUTA="./data/imagenes/";
+	
+	private String ruta;
 	
 	private ComponenteBusquedaPanel principal;
 	
@@ -34,10 +35,11 @@ public class PanelExploracion extends JPanel implements ActionListener {
 	 */
 	public PanelExploracion(ComponenteBusquedaPanel ventana) {
 		principal=ventana;
+		ruta=principal.darRuta();
 		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
 		
-		JLabel lblZonaExploracion = new JLabel(new ImageIcon(RUTA+"explorar.png"));
+		JLabel lblZonaExploracion = new JLabel(new ImageIcon(ruta+"explorar.png"));
 		lblZonaExploracion.setBounds(0, 6, 334, 95);
 		add(lblZonaExploracion);
 		
@@ -47,7 +49,7 @@ public class PanelExploracion extends JPanel implements ActionListener {
 		textField.setColumns(10);
 		
 		btnAnadirSitio = new JButton("");
-		ImageIcon imagen=new ImageIcon(RUTA+"anadir.png");
+		ImageIcon imagen=new ImageIcon(ruta+"anadir.png");
 		btnAnadirSitio.setIcon(imagen);
 		btnAnadirSitio.addActionListener(this);
 		btnAnadirSitio.setActionCommand("ANADIR");
@@ -62,7 +64,7 @@ public class PanelExploracion extends JPanel implements ActionListener {
 		scrollPane.setViewportView(listaSitiosFuente);
 		
 		btnIniciarExploracion = new JButton("");
-		ImageIcon imagen1=new ImageIcon(RUTA+"iniciar.png");
+		ImageIcon imagen1=new ImageIcon(ruta+"iniciar.png");
 		btnIniciarExploracion.setIcon(imagen1);
 		btnIniciarExploracion.addActionListener(this);
 		btnIniciarExploracion.setActionCommand("INICIAR");
@@ -70,7 +72,7 @@ public class PanelExploracion extends JPanel implements ActionListener {
 		add(btnIniciarExploracion);
 		
 		btnVolver = new JButton("");
-		ImageIcon imagen2=new ImageIcon(RUTA+"volver.png");
+		ImageIcon imagen2=new ImageIcon(ruta+"volver.png");
 		btnVolver.setIcon(imagen2);
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("VOLVER");

@@ -26,7 +26,7 @@ public class PanelHistorial extends JPanel implements ActionListener {
 	private DefaultListModel<Query> model;
 	private JList listHistorial;
 	
-	private final static String RUTA="./data/imagenes/";
+	private String ruta;
 
 	/**
 	 * Create the panel.
@@ -34,7 +34,7 @@ public class PanelHistorial extends JPanel implements ActionListener {
 	public PanelHistorial(ComponenteBusquedaPanel ventana,Query[] nHistorial) {
 		principal=ventana;
 		historial=nHistorial;
-		
+		ruta=principal.darRuta();
 		
 		setPreferredSize(new Dimension(340, 450));
 		setLayout(null);
@@ -47,14 +47,14 @@ public class PanelHistorial extends JPanel implements ActionListener {
 		scrollPane.setViewportView(listHistorial);
 		
 		JButton btnVolver = new JButton("<-");
-		ImageIcon imagen = new ImageIcon(RUTA+"volver.png");
+		ImageIcon imagen = new ImageIcon(ruta+"volver.png");
 		btnVolver.setIcon(imagen);
 		btnVolver.addActionListener(this);
 		btnVolver.setActionCommand("volver");
 		btnVolver.setBounds(0, 427, 340, 23);
 		add(btnVolver);
 		
-		JLabel lblHistorial = new JLabel(new ImageIcon(RUTA+"exploraciones1.png"));
+		JLabel lblHistorial = new JLabel(new ImageIcon(ruta+"exploraciones1.png"));
 		lblHistorial.setBounds(0, 0, 340, 100);
 		add(lblHistorial);
 
