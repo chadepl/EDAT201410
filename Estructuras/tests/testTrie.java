@@ -11,6 +11,15 @@ public class testTrie extends TestCase{
 	}
 	
 	private void setupEscenario2(){
+		sintactico = new Trie<String>();
+		sintactico.agregar("amor", "Sentimiento hacia alguien");
+		sintactico.agregar("amada", "Persona amada por otra");
+		sintactico.agregar("elefante", "Animal gris y muy grande");
+		sintactico.agregar("zorro", "Animal rojo que canta");
+		sintactico.agregar("elegante", "Con porte, clase");
+		sintactico.agregar("cabeza", "Parte de la anatomia humana");
+		sintactico.agregar("cabezazo", "Golpe propiciado por una cabeza");
+		sintactico.agregar("zorra", "Esposa del zorro");
 			
 		}
 	
@@ -36,6 +45,20 @@ public class testTrie extends TestCase{
 		assertEquals("Parte de la anatomia humana", agregar6);
 		assertEquals("Golpe propiciado por una cabeza", agregar7);
 		assertEquals("Esposa del zorro", agregar8);
+	}
+	
+	public void testBuscar(){
+		setupEscenario2();
+		assertEquals("Animal rojo que canta", sintactico.buscar("zorro"));
+		assertEquals("Con porte, clase",sintactico.buscar("elegante"));
+		assertNull(sintactico.buscar("ella"));
+	}
+	
+	public void testEliminar(){
+		setupEscenario2();
+		assertEquals("Animal rojo que canta", sintactico.eliminar("zorro"));
+		assertEquals("Con porte, clase",sintactico.eliminar("elegante"));
+		assertNull(sintactico.buscar("ella"));
 	}
 
 }

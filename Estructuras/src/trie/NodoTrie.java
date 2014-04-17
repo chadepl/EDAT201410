@@ -10,12 +10,23 @@ public class NodoTrie<T> {
 	
 	public T elemento;
 	
+	
+	/**
+	 * 
+	 * @param nId
+	 */
 	public NodoTrie(char nId){
 		hijo = null;
 		hermano = null;
 		id = nId;
 	}
 	
+	/**
+	 * 
+	 * @param palabra
+	 * @param elemento
+	 * @return
+	 */
 	public T agregar(String palabra, T elemento){
 	
 		if(palabra.charAt(0)==id){
@@ -62,6 +73,11 @@ public class NodoTrie<T> {
 		
 	}
 	
+	/**
+	 * 
+	 * @param palabra
+	 * @return
+	 */
 	public T buscar(String palabra){
 		
 		if(palabra.charAt(0)==id){
@@ -71,13 +87,9 @@ public class NodoTrie<T> {
 				return elemento;
 
 			}else if(hijo != null){
-				
-					if(hijo.id>palabra.charAt(0)){
-						
+					if(hijo.id>palabra.charAt(1)){
 						return null;
-						
 					}
-					
 				return hijo.buscar(palabra.substring(1));
 		
 			}else if(hijo == null){
@@ -86,12 +98,15 @@ public class NodoTrie<T> {
 				
 			}
 			
-		}else if(palabra.charAt(0)>id){
+		}else if (palabra.charAt(0)>id){
 			
 			if(hermano!=null){
 				
-				return hermano.buscar(palabra);
+					if(palabra.charAt(0)<hermano.id){
+						return null;
+					}
 				
+					return hermano.buscar(palabra);
 			}else{
 				
 				return null;
@@ -101,8 +116,68 @@ public class NodoTrie<T> {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param palabra
+	 * @return
+	 */
 	public T eliminar(String palabra){
+
+		if (palabra.charAt(0) == id) {
+
+			if (palabra.length() == 1) {
+				
+				T elementoEliminado=elemento;
+				
+				elemento=null;
+				
+				eliminarSobrantes(palabra);
+
+				return elementoEliminado;
+
+			} else if (hijo != null) {
+				if (hijo.id > palabra.charAt(1)) {
+					return null;
+				}
+				return hijo.buscar(palabra.substring(1));
+
+			} else if (hijo == null) {
+
+				return null;
+
+			}
+
+		} else if (palabra.charAt(0) > id) {
+
+			if (hermano != null) {
+
+				if (palabra.charAt(0) < hermano.id) {
+					return null;
+				}
+
+				return hermano.buscar(palabra);
+			} else {
+
+				return null;
+
+			}
+		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean esHoja(){
+		return hermano==null&&hijo==null?true:false;
+	}
+	
+	/**
+	 * 
+	 */
+	public void eliminarSobrantes(String palabra){
+		
 	}
 
 }
