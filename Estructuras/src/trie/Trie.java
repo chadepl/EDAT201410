@@ -1,6 +1,6 @@
 package trie;
 
-public class Trie<T> implements ITrie {
+public class Trie<T> implements ITrie<T> {
 	
 	private NodoTrie<T> raiz;
 	
@@ -9,21 +9,34 @@ public class Trie<T> implements ITrie {
 	}
 
 	@Override
-	public Object agregar(String palabra, Object elemento) {
-		// TODO Auto-generated method stub
-		return null;
+	public T agregar(String palabra, T elemento) {
+		if(raiz == null){
+			raiz = new NodoTrie<T>(palabra.charAt(0));
+		}else if(raiz.id>palabra.charAt(0)){
+			NodoTrie<T> nuevo = new NodoTrie<T>(palabra.charAt(0));
+			nuevo.hermano=raiz;
+			raiz=nuevo;
+		}
+		return raiz.agregar(palabra, elemento);
+		
 	}
 
 	@Override
-	public Object buscar(String palabra) {
-		// TODO Auto-generated method stub
-		return null;
+	public T buscar(String palabra) {
+		if (raiz == null) {
+			return null;
+		} else {
+			return raiz.buscar(palabra);
+		}
 	}
 
 	@Override
-	public Object eliminar(String palabra) {
-		// TODO Auto-generated method stub
-		return null;
+	public T eliminar(String palabra) {
+		if (raiz == null) {
+			return null;
+		} else {
+			return raiz.eliminar(palabra);
+		}
 	}
 
 }

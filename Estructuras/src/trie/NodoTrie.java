@@ -2,13 +2,13 @@ package trie;
 
 public class NodoTrie<T> {
 	
-	private NodoTrie<T> hijo;
+	public NodoTrie<T> hijo;
 	
-	private NodoTrie<T> hermano;
+	public NodoTrie<T> hermano;
 	
-	private char id;
+	public char id;
 	
-	private T elemento;
+	public T elemento;
 	
 	public NodoTrie(char nId){
 		hijo = null;
@@ -17,29 +17,45 @@ public class NodoTrie<T> {
 	}
 	
 	public T agregar(String palabra, T elemento){
-		//Caso 1, cuando la letra a comparar es igual a la del nodo
+	
 		if(palabra.charAt(0)==id){
-			//
+			
 			if(palabra.length()==1){
+				
 				this.elemento=elemento;
 				return elemento;
-				//
+
 			}else if(hijo != null){
+					if(hijo.id>palabra.charAt(1)){
+						NodoTrie<T> nuevo = new  NodoTrie<T>(palabra.charAt(1));
+						nuevo.hermano=hijo;
+						hijo=nuevo;
+					}
 				return hijo.agregar(palabra.substring(1), elemento);
-				//
+		
 			}else if(hijo == null){
-				hijo = new NodoTrie<T>(palabra.substring(1).charAt(0));
+				
+				hijo = new NodoTrie<T>(palabra.charAt(1));
 				return hijo.agregar(palabra.substring(1), elemento);
+				
 			}
-		}else if(palabra.charAt(0)>id){
+			
+		}else if (palabra.charAt(0)>id){
+			
 			if(hermano!=null){
-				NodoTrie<T> nodo= new NodoTrie<T>(palabra.charAt(0));
-				nodo.hermano=this.hermano;
-				this.hermano=nodo;
-				return nodo.agregar(palabra, elemento);
+				
+					if(palabra.charAt(0)<hermano.id){
+						NodoTrie<T> nuevo=new NodoTrie<T>(palabra.charAt(0));
+						nuevo.hermano=hermano;
+						hermano=nuevo;
+					}
+				
+					return hermano.agregar(palabra, elemento);
 			}else{
+				
 				hermano = new NodoTrie<T>(palabra.charAt(0));
 				return hermano.agregar(palabra, elemento);
+				
 			}
 		}
 		return null;
@@ -47,6 +63,41 @@ public class NodoTrie<T> {
 	}
 	
 	public T buscar(String palabra){
+		
+		if(palabra.charAt(0)==id){
+			
+			if(palabra.length()==1){
+				
+				return elemento;
+
+			}else if(hijo != null){
+				
+					if(hijo.id>palabra.charAt(0)){
+						
+						return null;
+						
+					}
+					
+				return hijo.buscar(palabra.substring(1));
+		
+			}else if(hijo == null){
+				
+				return null;
+				
+			}
+			
+		}else if(palabra.charAt(0)>id){
+			
+			if(hermano!=null){
+				
+				return hermano.buscar(palabra);
+				
+			}else{
+				
+				return null;
+				
+			}
+		}
 		return null;
 	}
 	
