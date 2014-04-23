@@ -22,10 +22,10 @@ public class NodoTrie<T> {
 	}
 	
 	/**
-	 * 
-	 * @param palabra
-	 * @param elemento
-	 * @return
+	 * Metodo que agrega un elemento al trie.
+	 * @param palabra La palabra que identifica al elemento.
+	 * @param elemento Elemento que se va a agregar.
+	 * @return El elemento que se agrego
 	 */
 	public T agregar(String palabra, T elemento){
 	
@@ -74,9 +74,9 @@ public class NodoTrie<T> {
 	}
 	
 	/**
-	 * 
-	 * @param palabra
-	 * @return
+	 * Metodo que se encarga de buscar un elemento dada la palabra que lo identifica
+	 * @param palabra que identifica el elemento
+	 * @return elemento que se estaba buscando o null en caso de no encontrarlo
 	 */
 	public T buscar(String palabra){
 		
@@ -117,9 +117,9 @@ public class NodoTrie<T> {
 	}
 	
 	/**
-	 * 
-	 * @param palabra
-	 * @return
+	 * Metodo que elimina un elemento del trie
+	 * @param palabra donde esta el elemento a eliminar
+	 * @return elemento que se elimino
 	 */
 	public T eliminar(String palabra){
 
@@ -166,15 +166,15 @@ public class NodoTrie<T> {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Metodo que dice si es hoja
+	 * @return true si es hoja o false si no
 	 */
 	public boolean esHoja(){
 		return hermano==null&&hijo==null?true:false;
 	}
 	
 	/**
-	 * 
+	 * Metodo que se encarga de eliminar los sobrantes
 	 */
 	public void eliminarSobrantes(String palabra){
 		
