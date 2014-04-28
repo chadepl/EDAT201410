@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.CupiFlight;
+
 @SuppressWarnings("serial")
 public class ServletIndex  extends HttpServlet {
+	
+	private CupiFlight instancia;
 
 	public void init(){
 		System.out.println("Estoy en el INICIO");
+		instancia = CupiFlight.getInstance();
 	}
 	
 	public void destroy(){

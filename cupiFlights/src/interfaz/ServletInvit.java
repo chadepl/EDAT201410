@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.CupiFlight;
+
 @SuppressWarnings("serial")
 public class ServletInvit extends HttpServlet{
 	
+	private CupiFlight instancia;
+	
 	public void init(){
 		System.out.println("Estoy en el INVITADO");
+		instancia = CupiFlight.getInstance();
 	}
 	
 	public void destroy(){
@@ -29,11 +34,19 @@ public class ServletInvit extends HttpServlet{
 	protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
         // Maneja el GET y el POST de la misma manera
-		
+		procesarSolicitud(request, response);
     	
     }
 	
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		imprimirInvit(response);
+
+		
+	}
+	
+	private void imprimirInvit(HttpServletResponse response) throws IOException{
+		
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
 		out.println("<html lang=\"en\">");
@@ -136,8 +149,6 @@ public class ServletInvit extends HttpServlet{
 		out.println("    <script src=\"js/docs.min.js\"></script>");
 		out.println("  </body>");
 		out.println("</html>");
-
-		
 	}
 
 }

@@ -8,14 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.CupiFlight;
+
 @SuppressWarnings("serial")
 public class ServletAcciones extends HttpServlet{
 	
 	private int requerimiento;
+	
+	private CupiFlight instancia;
 
 	public void init(){
 		requerimiento = -1;
 		System.out.println("Estoy en el INVITADO");
+		instancia = CupiFlight.getInstance();
 	}
 	
 	public void destroy(){

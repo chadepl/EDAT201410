@@ -37,6 +37,21 @@ Autor: Pablo Barvo - 05-Mayo-2006
  <servlet-name>Acciones</servlet-name>
   <servlet-class>interfaz.ServletAcciones</servlet-class>
  </servlet>
+ 
+ <servlet>
+ <servlet-name>Fechas</servlet-name>
+  <servlet-class>interfaz.ServletFechas</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ <servlet-name>Consultas</servlet-name>
+  <servlet-class>interfaz.ServletConsultas</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ <servlet-name>Mapa</servlet-name>
+  <servlet-class>interfaz.ServletMapa</servlet-class>
+ </servlet>
  <!-- MAPPING -->
  
  <servlet-mapping>
@@ -62,6 +77,21 @@ Autor: Pablo Barvo - 05-Mayo-2006
   <servlet-mapping>
   <servlet-name>Acciones</servlet-name>
   <url-pattern>/acciones.html</url-pattern>
+ </servlet-mapping>
+ 
+    <servlet-mapping>
+  <servlet-name>Fechas</servlet-name>
+  <url-pattern>/fechas.html</url-pattern>
+ </servlet-mapping>
+ 
+      <servlet-mapping>
+  <servlet-name>Consultas</servlet-name>
+  <url-pattern>/consultas.html</url-pattern>
+ </servlet-mapping>
+ 
+        <servlet-mapping>
+  <servlet-name>Mapa</servlet-name>
+  <url-pattern>/mapas.html</url-pattern>
  </servlet-mapping>
  
  <login-config>

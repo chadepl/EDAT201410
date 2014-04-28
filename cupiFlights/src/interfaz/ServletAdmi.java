@@ -2,11 +2,15 @@ package interfaz;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import mundo.Aeropuerto;
+import mundo.CupiFlight;
 
 @SuppressWarnings("serial")
 public class ServletAdmi extends HttpServlet {
@@ -15,7 +19,12 @@ public class ServletAdmi extends HttpServlet {
 	
 	private String admiActual;
 	
+	private CupiFlight instancia;
+	
 	public void init(){
+		
+		instancia = CupiFlight.getInstance();
+		
 		System.out.println("Estoy en el ADMINISTRADOR");
 	}
 	
@@ -136,14 +145,28 @@ public class ServletAdmi extends HttpServlet {
 		out.println("                </tr>");
 		out.println("              </thead>");
 		out.println("              <tbody>");
-		out.println("                <tr>");
-		out.println("                  <td>1,001</td>");
-		out.println("                  <td>Lorem</td>");
-		out.println("                  <td>ipsum</td>");
-		out.println("                  <td>dolor</td>");
-		out.println("                  <td>dolor</td>");
-		out.println("                  <td>sit</td>");
-		out.println("                </tr>");
+		Iterator<Aeropuerto> iterador=instancia.consultarAeropuertos();
+		int i=0;
+    	while(iterador.hasNext()){
+    		Aeropuerto actual=iterador.next();
+    		i++;
+    		out.println("                <tr>");
+    		out.println("                  <td>"+i+"</td>");
+    		out.println("                  <td>"+actual.codigo+"</td>");
+    		out.println("                  <td>"+actual.nombre+"</td>");
+    		out.println("                  <td>"+actual.ciudad+"</td>");
+    		out.println("                  <td>dolor</td>");
+    		out.println("                  <td>sit</td>");
+    		out.println("                </tr>");
+    	}
+//		out.println("                <tr>");
+//		out.println("                  <td>1,001</td>");
+//		out.println("                  <td>Lorem</td>");
+//		out.println("                  <td>ipsum</td>");
+//		out.println("                  <td>dolor</td>");
+//		out.println("                  <td>dolor</td>");
+//		out.println("                  <td>sit</td>");
+//		out.println("                </tr>");
 		out.println("              </tbody>");
 		out.println("            </table>");
 		out.println("          </div>");
