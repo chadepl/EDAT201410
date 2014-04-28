@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Administrador</title>
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+
+    
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Nivel 16</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Principal</a></li>
+            <li><a href="invit.html">Invitado</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="admi.html">Principal</a></li>
+            <li class="active"><a href="acciones.html">Acciones</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Administradores</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-md-12 placeholder">
+              <img src="avion.jpg" class="img-responsive" alt="Generic placeholder thumbnail" width="200" height="200">
+              <h4>Nicolas Chaves de Plaza</h4>
+              <span class="text-muted">Co-Founder</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">Acciones de Administrador</h2>
+          <h3 class="sub-header">Agregar Aeropuerto</h3>
+
+            <form class="form-inline" role="form" method="get" action="acciones.html">
+              <div class="form-group">
+                <input type="text" class="form-control" name="agregarAirp" placeholder="Codigo del Aeropuerto">
+              </div>
+              <input type="submit" class="btn btn-success" value="Agregar">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta-->
+            <p></p>
+            <div class="container well">
+            <label>Se ha agregado:</label>
+            </div>
+
+          <h3 class="sub-header">Eliminar Aeropuerto</h3>
+
+             <form class="form-inline" role="form" method="get" action="acciones.html">
+              <div class="form-group">
+                <input type="text" class="form-control" name="eliminarAirp" placeholder="Codigo del Aeropuerto">
+              </div>
+              <input type="submit" class="btn btn-danger" value="Eliminar">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta-->
+            <p></p>
+            <div class="container well">
+            <label>Se ha eliminado:</label>
+            </div>
+
+          <h3 class="sub-header">Puntuar</h3>
+
+             <form class="form-inline" role="form" method="get" action="acciones.html">
+              <div class="form-group">
+                   <input type="text" class="form-control" name="puntuacion" placeholder="Codigo del Aeropuerto">
+                  <select class="form-control" name="puntuarAirp">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+              </div>
+              <input type="submit" class="btn btn-success" value="Puntuar!">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta-->
+            <p></p>
+            <div class="container well">
+            <label>Se ha puntuado:</label>
+            </div>
+
+             
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/docs.min.js"></script>
+  </body>
+</html>

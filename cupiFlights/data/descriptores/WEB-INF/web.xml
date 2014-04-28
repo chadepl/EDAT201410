@@ -17,19 +17,53 @@ Autor: Pablo Barvo - 05-Mayo-2006
   <servlet-name>ResultadoPost</servlet-name>
   <servlet-class>interfaz.ServletCupiFlightsPost</servlet-class>
  </servlet>
+ 
  <servlet>
-  <servlet-name>ResultadoGet</servlet-name>
-  <servlet-class>interfaz.ServletCupiFlightsGet</servlet-class>
+  <servlet-name>Administrador</servlet-name>
+  <servlet-class>interfaz.ServletAdmi</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <servlet-name>Invitado</servlet-name>
+  <servlet-class>interfaz.ServletInvit</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <servlet-name>Inicio</servlet-name>
+  <servlet-class>interfaz.ServletIndex</servlet-class>
+ </servlet>
+ 
+ <servlet>
+ <servlet-name>Acciones</servlet-name>
+  <servlet-class>interfaz.ServletAcciones</servlet-class>
  </servlet>
  <!-- MAPPING -->
+ 
  <servlet-mapping>
   <servlet-name>ResultadoPost</servlet-name>
   <url-pattern>/resultadoPost.htm</url-pattern>
  </servlet-mapping>
- <servlet-mapping>
-  <servlet-name>ResultadoGet</servlet-name>
-  <url-pattern>/resultadoGet.htm</url-pattern>
+ 
+  <servlet-mapping>
+  <servlet-name>Administrador</servlet-name>
+  <url-pattern>/admi.html</url-pattern>
  </servlet-mapping>
+ 
+  <servlet-mapping>
+  <servlet-name>Invitado</servlet-name>
+  <url-pattern>/invit.html</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet-mapping>
+  <servlet-name>Inicio</servlet-name>
+  <url-pattern>/index.html</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet-mapping>
+  <servlet-name>Acciones</servlet-name>
+  <url-pattern>/acciones.html</url-pattern>
+ </servlet-mapping>
+ 
  <login-config>
   <auth-method>BASIC</auth-method>
  </login-config>
