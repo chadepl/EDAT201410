@@ -1,6 +1,13 @@
 package lista;
 
-public class Elemento<T> {
+import java.io.Serializable;
+
+public class Elemento<T> implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private T t;
 	

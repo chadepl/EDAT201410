@@ -1,6 +1,14 @@
 package trie;
 
-public class Trie<T> implements ITrie<T> {
+import java.io.Serializable;
+
+public class Trie<T> implements ITrie<T>,Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	private NodoTrie<T> raiz;
 	

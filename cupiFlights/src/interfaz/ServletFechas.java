@@ -2,6 +2,8 @@ package interfaz;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -121,10 +123,15 @@ public class ServletFechas extends HttpServlet {
 			out.println("                </tr>");
 			out.println("              </thead>");
 			out.println("              <tbody>");
+			Iterator<Date> fechas = instancia.fechasDelSistema();
+			int i = 0;
+			while(fechas.hasNext()){
+			i++;
 			out.println("                <tr>");
-			out.println("                  <td>1,001</td>");
-			out.println("                  <td>Lorem</td>");
+			out.println("                  <td>"+i+"</td>");
+			out.println("                  <td>"+fechas.next().toString()+"</td>");
 			out.println("                </tr>");
+			}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");

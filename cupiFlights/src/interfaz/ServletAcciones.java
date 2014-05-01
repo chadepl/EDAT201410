@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.Aeropuerto;
 import mundo.CupiFlight;
 
 @SuppressWarnings("serial")
@@ -44,26 +45,22 @@ public class ServletAcciones extends HttpServlet{
 	private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		if(request.getParameter("agregarAirp")!=null){
-			String agregar = request.getParameter("agregarAirp");
 			//Aca va lo que se hace en el requerimiento
 			requerimiento = 1;
 		} 
 		if(request.getParameter("eliminarAirp")!=null){
 			//Aca va lo que se hace en el requerimiento
-			String eliminar = request.getParameter("eliminarAirp");
 			requerimiento = 2;
 		}
-		if(request.getParameter("puntuar")!=null){
+		if(request.getParameter("puntuacion")!=null){
 			//Aca va lo que se hace en el requerimiento
-			String air = request.getParameter("puntuar");
-			int puntuacion = Integer.parseInt(request.getParameter("puntuarAirp"));
 			requerimiento = 3;
 		}
 		
-		imprimirAcciones(requerimiento, response);
+		imprimirAcciones(requerimiento,request, response);
 	}
 	
-	private void imprimirAcciones(int req,HttpServletResponse response) throws IOException{
+	private void imprimirAcciones(int req,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE html>");
@@ -143,10 +140,12 @@ public class ServletAcciones extends HttpServlet{
 		out.println("            </form>");
 		out.println("");
 		if(req==1){
+			String agregar = request.getParameter("agregarAirp");
+			Aeropuerto air = instancia.agregarAeropuerto(agregar);
 		out.println("            <!--Respuesta-->");
 		out.println("            <p></p>");
 		out.println("            <div class=\"container well\">");
-		out.println("            <label>Se ha agregado:</label>");
+		out.println("            <label>Se ha agregado: "+air.nombre+"</label>");
 		out.println("            </div>");
 		out.println("");
 		requerimiento=-1;
@@ -162,10 +161,12 @@ public class ServletAcciones extends HttpServlet{
 		out.println("            </form>");
 		out.println("");
 		if(req==2){
+			String eliminar = request.getParameter("eliminarAirp");
+			Aeropuerto eir = instancia.eliminarAeropuerto(eliminar);
 		out.println("            <!--Respuesta-->");
 		out.println("            <p></p>");
 		out.println("            <div class=\"container well\">");
-		out.println("            <label>Se ha eliminado:</label>");
+		out.println("            <label>Se ha eliminado: "+eir.nombre+"</label>");
 		out.println("            </div>");
 		out.println("");
 		requerimiento=-1;
@@ -188,10 +189,14 @@ public class ServletAcciones extends HttpServlet{
 		out.println("            </form>");
 		out.println("");
 		if(req==3){
+			String air = request.getParameter("puntuacion");
+			int puntuacion = Integer.parseInt(request.getParameter("puntuarAirp"));
+			boolean puntuado = instancia.calificarAeropuerto(air, puntuacion);
+			String puntuados = puntuado?"Se ha puntuado el aeropuerto":"No se ha puntuado :(";
 		out.println("            <!--Respuesta-->");
 		out.println("            <p></p>");
 		out.println("            <div class=\"container well\">");
-		out.println("            <label>Se ha puntuado:</label>");
+		out.println("            <label>Se ha puntuado: "+puntuados+"</label>");
 		out.println("            </div>");
 		out.println("");
 		requerimiento=-1;

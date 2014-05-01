@@ -125,8 +125,8 @@ public class ServletAdmi extends HttpServlet {
 		out.println("          <div class=\"row placeholders\">");
 		out.println("            <div class=\"col-xs-6 col-md-12 placeholder\">");
 		out.println("              <img src=\""+admiActual+"\" class=\"img-responsive\" alt=\"Generic placeholder thumbnail\" width=\"200\" height=\"200\">");
-		String admi=admiActual.equals("nicolas.jpg")?"Nicolas":"Daniel";
-		out.println("              <h4>"+admi+"</h4>");
+		//String admi=admiActual.equals("nicolas.jpg")?"Nicolas":"Daniel";
+		out.println("              <h4>Nicolas</h4>");
 		out.println("              <span class=\"text-muted\">Co-Founder</span>");
 		out.println("            </div>");
 		out.println("          </div>");
@@ -153,20 +153,12 @@ public class ServletAdmi extends HttpServlet {
     		out.println("                <tr>");
     		out.println("                  <td>"+i+"</td>");
     		out.println("                  <td>"+actual.codigo+"</td>");
-    		out.println("                  <td>"+actual.nombre+"</td>");
+    		out.println("                  <td><a href=\"aeropuertos.html?cod="+actual.codigo+"\">"+actual.nombre+"</td>");
     		out.println("                  <td>"+actual.ciudad+"</td>");
-    		out.println("                  <td>dolor</td>");
-    		out.println("                  <td>sit</td>");
+    		out.println("                  <td>"+actual.pais+"</td>");
+    		out.println("                  <td>"+actual.calificacion+"</td>");
     		out.println("                </tr>");
     	}
-//		out.println("                <tr>");
-//		out.println("                  <td>1,001</td>");
-//		out.println("                  <td>Lorem</td>");
-//		out.println("                  <td>ipsum</td>");
-//		out.println("                  <td>dolor</td>");
-//		out.println("                  <td>dolor</td>");
-//		out.println("                  <td>sit</td>");
-//		out.println("                </tr>");
 		out.println("              </tbody>");
 		out.println("            </table>");
 		out.println("          </div>");

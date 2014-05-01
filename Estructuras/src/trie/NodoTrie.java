@@ -1,7 +1,14 @@
 package trie;
 
-public class NodoTrie<T> {
+import java.io.Serializable;
+
+public class NodoTrie<T> implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NodoTrie<T> hijo;
 	
 	public NodoTrie<T> hermano;

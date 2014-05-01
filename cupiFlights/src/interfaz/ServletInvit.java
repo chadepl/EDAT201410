@@ -2,13 +2,16 @@ package interfaz;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.Aeropuerto;
 import mundo.CupiFlight;
+import mundo.Vuelo;
 
 @SuppressWarnings("serial")
 public class ServletInvit extends HttpServlet{
@@ -119,21 +122,29 @@ public class ServletInvit extends HttpServlet{
 		out.println("                <tr>");
 		out.println("                  <th>#</th>");
 		out.println("                  <th>Codigo</th>");
-		out.println("                  <th>Nombre</th>");
-		out.println("                  <th>Ciudad</th>");
-		out.println("                  <th>Pais</th>");
-		out.println("                  <th>Puntuaci??n</th>");
+		out.println("                  <th>Fecha</th>");
+		out.println("                  <th>Aerolinea</th>");
+		out.println("                  <th>Origen</th>");
+		out.println("                  <th>Destino</th>");
+		out.println("                  <th>Calificacion</th>");
 		out.println("                </tr>");
 		out.println("              </thead>");
 		out.println("              <tbody>");
-		out.println("                <tr>");
-		out.println("                  <td>1,001</td>");
-		out.println("                  <td>Lorem</td>");
-		out.println("                  <td>ipsum</td>");
-		out.println("                  <td>dolor</td>");
-		out.println("                  <td>dolor</td>");
-		out.println("                  <td>sit</td>");
-		out.println("                </tr>");
+		Iterator<Vuelo> iterador=instancia.consultarVuelos();
+		int i=0;
+    	while(iterador.hasNext()){
+    		Vuelo actual=iterador.next();
+    		i++;
+    		out.println("                <tr>");
+    		out.println("                  <td>"+i+"</td>");
+    		out.println("                  <td>"+actual.codigo+"</td>");
+    		out.println("                  <td>"+actual.darFechaDeVuelo()+"</td>");
+    		out.println("                  <td>"+actual.aerolinea+"</td>");
+    		out.println("                  <td>"+actual.darOrigen()+"</td>");
+    		out.println("                  <td>"+actual.darDestino()+"</td>");
+    		out.println("                  <td>"+actual.darCalificacion()+"</td>");
+    		out.println("                </tr>");
+    	}
 		out.println("              </tbody>");
 		out.println("            </table>");
 		out.println("          </div>");

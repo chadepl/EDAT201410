@@ -40,6 +40,7 @@ public class ServletMapa  extends HttpServlet{
 			
 			private void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws IOException{
 				
+				
 				imprimirMapa(response);
 
 				
@@ -116,8 +117,8 @@ public class ServletMapa  extends HttpServlet{
 				out.println("          </div>");
 				out.println("");
 				out.println("          <h2 class=\"sub-header\">Mapa</h2>");
-				out.println("             <div class=\"container\"> ");
-				out.println("            <img src=\"map.png\" alt=\"Map\">");
+				out.println("             <div class=\"container well col-xs-6 col-md-6\"> ");
+				out.println("            <img src=\""  +instancia.mostrarMapaTardanza("all")+  "\" alt=\"Map\">");
 				out.println("            </div>");
 				out.println("            ");
 				out.println("        </div>");

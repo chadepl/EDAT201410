@@ -52,6 +52,12 @@ Autor: Pablo Barvo - 05-Mayo-2006
  <servlet-name>Mapa</servlet-name>
   <servlet-class>interfaz.ServletMapa</servlet-class>
  </servlet>
+ 
+ 
+  <servlet>
+ <servlet-name>Aeropuertos</servlet-name>
+  <servlet-class>interfaz.ServletAeropuertos</servlet-class>
+ </servlet>
  <!-- MAPPING -->
  
  <servlet-mapping>
@@ -92,6 +98,11 @@ Autor: Pablo Barvo - 05-Mayo-2006
         <servlet-mapping>
   <servlet-name>Mapa</servlet-name>
   <url-pattern>/mapas.html</url-pattern>
+ </servlet-mapping>
+ 
+  <servlet-mapping>
+  <servlet-name>Aeropuertos</servlet-name>
+  <url-pattern>/aeropuertos.html</url-pattern>
  </servlet-mapping>
  
  <login-config>

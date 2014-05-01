@@ -1,6 +1,8 @@
 package lista;
 
-public interface ILista<T> extends Iterable<T> {
+import java.io.Serializable;
+
+public interface ILista<T> extends Iterable<T>,Serializable {
 	
 	/**
 	 * 

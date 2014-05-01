@@ -1,7 +1,14 @@
 package lista;
 
-public class NodoLista<T> {
+import java.io.Serializable;
+
+public class NodoLista<T> implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private NodoLista<T> siguiente;
 	
 	private T t;

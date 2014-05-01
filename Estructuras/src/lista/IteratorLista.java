@@ -1,9 +1,15 @@
 package lista;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class IteratorLista<T> implements Iterator<T>{
+public class IteratorLista<T> implements Iterator<T>,Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private NodoLista<T> proximo ;
 	

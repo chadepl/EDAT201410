@@ -1,6 +1,14 @@
 package trie;
 
-public class Trie<T> implements ITrie<T> {
+import java.io.Serializable;
+
+public class Trie<T> implements ITrie<T>,Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	private NodoTrie<T> raiz;
 	
@@ -8,6 +16,12 @@ public class Trie<T> implements ITrie<T> {
 		raiz = null;
 	}
 
+	/**
+	 * Metodo que agrega un elemento al trie.
+	 * @param palabra La palabra que identifica al elemento.
+	 * @param elemento Elemento que se va a agregar.
+	 * @return El elemento que se agrego
+	 */
 	@Override
 	public T agregar(String palabra, T elemento) {
 		if(raiz == null){
@@ -21,6 +35,11 @@ public class Trie<T> implements ITrie<T> {
 		
 	}
 
+	/**
+	 * Metodo que se encarga de buscar un elemento dada la palabra que lo identifica
+	 * @param palabra que identifica el elemento
+	 * @return elemento que se estaba buscando o null en caso de no encontrarlo
+	 */
 	@Override
 	public T buscar(String palabra) {
 		if (raiz == null) {
@@ -30,6 +49,11 @@ public class Trie<T> implements ITrie<T> {
 		}
 	}
 
+	/**
+	 * Metodo que elimina un elemento del trie
+	 * @param palabra donde esta el elemento a eliminar
+	 * @return elemento que se elimino
+	 */
 	@Override
 	public T eliminar(String palabra) {
 		if (raiz == null) {

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Consultas</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Nivel 16</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">Principal</a></li>
+            <li><a href="invit.html">Invitado</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="invit.html">Aeropuertos</a></li>
+            <li><a href="fechas.html">Fechas</a></li>
+            <li  class="active"><a href="consultas.html">Consultas</a></li>
+            <li><a href="mapas.html">Mapa</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Invitados</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-md-12 placeholder">
+              <img src="air.png" class="img-responsive" alt="Generic placeholder thumbnail" width="200" height="200">
+              <h4>El Mas Importante</h4>
+              <span class="text-muted">Invitado</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">Consultas</h2>
+
+          <!--Requerimiento 7, vuelos por aeropuerto-->
+
+          <h3 class="sub-header">Consulta de Vuelos Por Aeropuerto</h3>
+
+            <form class="form-inline" role="form" method="get" action="consultas.html">
+              <div class="form-group">
+                <input type="text" class="form-control" name="codReq7" placeholder="Codigo del Aeropuerto">
+                <input type="text" class="form-control" name="fec1Req7" placeholder="mm/dd/aa">
+                 <select class="form-control" name="tiposDeVuelos">
+                    <option>Saliendo</option>
+                    <option>Entrando</option>
+                  </select>
+                <input type="submit" class="btn btn-success" value="Enviar!">
+                <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+              </div>
+            </form>
+
+            <!--Respuesta a partir de aqui-->
+            <p></p>
+            <div class="container well">
+              <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
+                  <th>Atraso</th>
+                  <th>Aerolinea</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>18F300</td>
+                  <td>BOG</td>
+                  <td>JFK</td>
+                  <td>2</td>
+                  <td>United</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p></p>
+
+            <!--Requerimiento 8, estadisticas por aeropuerto-->
+
+          <h3 class="sub-header">Estadisticas Aeropuerto</h3>
+
+             <form class="form-inline" role="form" method="get" action="consultas.html">
+              <div class="form-group">
+                <input type="text" class="form-control" name="codReq8" placeholder="Codigo del Aeropuerto">
+                <input type="text" class="form-control" name="fec1Req8" placeholder="mm/dd/aa">
+                <input type="text" class="form-control" name="fec2Req8" placeholder="mm/dd/aa">
+              </div>
+              <input type="submit" class="btn btn-success" value="Enviar!">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta a partir de aqui-->
+            <p></p>
+            <div class="container well">
+              <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Aeropuerto</th>
+                  <th>Codigo</th>
+                  <th>Cancelados</th>
+                  <th>A Tiempo</th>
+                  <th>Mas de 15</th>
+                  <th>Mas de 30</th>
+                  <th>Mas de 45</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>El Dorado</td>
+                  <td>BOG</td>
+                  <td>1</td>
+                  <td>20</td>
+                  <td>4</td>
+                  <td>5</td>
+                  <td>6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p></p>
+
+        <!--Requerimiento 9, vuelos segun calificacion dada-->
+
+          <h3 class="sub-header">Vuelos por Calificacion</h3>
+
+             <form class="form-inline" role="form" method="get" action="consultas.html">
+              <div class="form-group">
+                  <select class="form-control" name="puntuarAirp">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                    <input type="text" class="form-control" name="fec1Req9" placeholder="mm/dd/aa">
+                    <input type="text" class="form-control" name="fec2Req9" placeholder="mm/dd/aa">
+              </div>
+              <input type="submit" class="btn btn-success" value="Enviar!">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta a partir de aqui-->
+            <p></p>
+            <div class="container well">
+              <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
+                  <th>Atraso</th>
+                  <th>Aerolinea</th>
+                  <th>Puntaje</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>18F300</td>
+                  <td>BOG</td>
+                  <td>JFK</td>
+                  <td>2</td>
+                  <td>United</td>
+                  <td>10</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p></p>
+
+            <!--Requerimiento 10, se ven las estadisticas de las aerolineas-->
+
+            <h3 class="sub-header">Estadisticas Aerolineas</h3>
+
+             <form class="form-inline" role="form" method="get" action="consultas.html">
+              <div class="form-group">
+                   <input type="text" class="form-control" name="fec1Req10" placeholder="mm/dd/aa">
+                    <input type="text" class="form-control" name="fec2Req10" placeholder="mm/dd/aa">
+              </div>
+              <input type="submit" class="btn btn-success" value="Enviar!">
+              <a href="http://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" class="btn btn-default">Codigos de Aeropuertos</a>
+            </form>
+
+            <!--Respuesta a partir de aqui-->
+            <p></p>
+            <div class="container well">
+              <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Codigo</th>
+                  <th>Nombre</th>
+                  <th>Ciudad</th>
+                  <th>Pais</th>
+                  <th>Puntuación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1,001</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p></p>
+          <div class="container well">
+              <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Codigo</th>
+                  <th>Nombre</th>
+                  <th>Ciudad</th>
+                  <th>Pais</th>
+                  <th>Puntuación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1,001</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!--Termina respuesta-->
+
+             
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/docs.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  </body>
+</html>

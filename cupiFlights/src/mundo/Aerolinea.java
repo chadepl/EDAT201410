@@ -1,25 +1,43 @@
 package mundo;
 
-public class Aerolinea {
+import java.io.Serializable;
+
+import lista.Lista;
+import trie.Trie;
+
+public class Aerolinea implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Nombre de la aerolinea.
 	 */
 	public String nombre;
 	
 	/**
-	 * Numero de telefono de la aerolinea.
+	 * Codigo de la aerolinea.
 	 */
-	public String phoneNumber;
+	public String fs;
+	
+	/**
+	 * Lista de vuelos.
+	 */
+	public Lista<Vuelo> listaVuelos;
+	
+	
 	
 	/**
 	 * Constructor de la clase.
 	 * @param nNombre nombre de la aerolinea.
 	 * @param nPhoneNumber numero de la aerolinea.
 	 */
-	public Aerolinea(String nNombre, String nPhoneNumber){
+	public Aerolinea(String nNombre,  String nCodigo){
 		nombre=nNombre;
-		phoneNumber=nPhoneNumber;
+		listaVuelos=new Lista<Vuelo>();
+		fs=nCodigo;
 	}
 	
 	/**
@@ -30,12 +48,21 @@ public class Aerolinea {
 		nombre=nNombre;
 	}
 	
+	
 	/**
-	 * Cambia el numero de la aerolinea.
-	 * @param nPhoneNumber nuevo numero de la aerolinea.
+	 * Agrega un vuelo a la aerolinea.
+	 * @param aAgregar el vuelo a agregar.
 	 */
-	public void cambiarNumero(String nPhoneNumber){
-		phoneNumber=nPhoneNumber;
+	public void agregarVuelo(Vuelo aAgregar){
+		listaVuelos.agregar(aAgregar);
+	}
+	
+	/**
+	 * Elimina un vuelo de los vuelos.
+	 * @return El vuelo eliminado.
+	 */
+	public boolean eliminarVuelo(Vuelo aEliminar){
+		return listaVuelos.eliminar(aEliminar);
 	}
 	
 	/**
@@ -46,11 +73,27 @@ public class Aerolinea {
 		return nombre;
 	}
 	
+	
 	/**
-	 * Retorna el numero telefonico de la aerolinea.
-	 * @return El numero telefonico de la aerolinea.
+	 * Retorna el codigo de la aerolinea.
+	 * @return El codigo de la aerolinea.
 	 */
-	public String darNumero(){
-		return phoneNumber;
+	public String darCodigo(){
+		return fs;
+	}
+	
+	/**
+	 * Devuelve la cantidad de vuelos retrasados.
+	 * @return La cantidad de vulos retrasados.
+	 */
+	public int darCantidadVuelosRetrasados(){
+		int aRetornar=0;
+		for(int i=0;i<listaVuelos.darLongitud();i++){
+			Vuelo temp=listaVuelos.dar(i);
+			if(temp.darLate15()>0&&temp.darLate30()>0&&temp.darLate45()>0){
+				aRetornar++;
+			}
+		}
+		return aRetornar;
 	}
 }

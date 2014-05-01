@@ -29,14 +29,14 @@ public interface ICupiFlight {
 	 * Califica un aeropuerto del sistema.
 	 * @param calificacion Calificacion del sistema. calificacion>=0. calificacion<=5.
 	 */
-	public void calificarAeropuerto(int calificacion);
+	public boolean calificarAeropuerto(String aCalificar, int calificacion);
 	
 	/**
 	 * * Consulta la calificacion de un aeropuerto.
 	 * @param aInvestigar aeropuerto a consultar su calificacion.
 	 * @return La calificacion del aeropuerto.
 	 */
-	public int consultarCalificacion(Aeropuerto aInvestigar);
+	public int consultarCalificacion(String aInvestigar);
 	
 	/**
 	 * Consulta las fechas del sistema.
@@ -56,7 +56,7 @@ public interface ICupiFlight {
 	 * @param fecha La fecha de busqueda.
 	 * @return Los vuelos del aeropuerto en la fecha dada.
 	 */
-	public Iterator<Vuelo> consultarVuelos(Aeropuerto aBuscar, Date fecha);
+	public Iterator<Vuelo> consultarVuelos(String aFind, Date fecha, String status1,String status2);
 	
 	/**
 	 * Metodo auxiliar para consultar los vuelos a tiempo entre ciertas fechas.
@@ -88,7 +88,7 @@ public interface ICupiFlight {
 	 * @param calificacionFinal Calificacion final de filtrado.
 	 * @return Los vuelos dentro del rango especificado.
 	 */
-	public Iterator<Vuelo> buscarVuelosRangoCalificacion(int calificacionInicial, int calificacionFinal);
+	public Iterator<Vuelo> buscarVuelosRangoCalificacion(int calificacionInicial);
 	
 	/**
 	 * Busca las aerolineas con mas vuelos retrasados.
@@ -105,5 +105,5 @@ public interface ICupiFlight {
 	/**
 	 * Muestra el mapa segun tardanza.
 	 */
-	public void mostrarMapaTardanza();
+	public String mostrarMapaTardanza(String algo);
 }

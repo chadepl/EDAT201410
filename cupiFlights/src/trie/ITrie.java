@@ -1,6 +1,8 @@
 package trie;
 
-public interface ITrie<T> {
+
+
+public interface ITrie<T>  {
 	
 	/**
 	 * 

@@ -1,6 +1,8 @@
 package trie;
 
-public interface ITrie<T> {
+import java.io.Serializable;
+
+public interface ITrie<T> extends Serializable {
 	
 	/**
 	 * 

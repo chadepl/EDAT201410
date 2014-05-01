@@ -1,13 +1,19 @@
 package mundo;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import lista.Lista;
 import trie.ITrie;
 import trie.Trie;
 
-public class Aeropuerto {
+public class Aeropuerto implements Comparable<Aeropuerto>,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Nombre del aeropuerto.
 	 */
@@ -21,7 +27,12 @@ public class Aeropuerto {
 	/**
 	 * Lista de vuelos del aeropuerto.
 	 */
-	public Lista<Vuelo> listaVuelos;
+	public Lista<Vuelo> listaVuelosSaliendo;
+	
+	/**
+	 * Lista de vuelos del aeropuerto.
+	 */
+	public Lista<Vuelo> listaVuelosEntrando;
 	
 	/**
 	 * Ciudad del aeropuerto.
@@ -34,6 +45,20 @@ public class Aeropuerto {
 	public String pais;
 	
 	/**
+	 * Calificacion del aeropuerto.
+	 */
+	public int calificacion;
+	
+	/**
+	 * Latitud de la ubicacion del aeropuerto.
+	 */
+	public String latitud;
+	
+	/**
+	 * Longitud de la ubicacion del aeropuerto.
+	 */
+	public String longitud;
+	/**
 	 * Codigo del aeropuerto.
 	 */
 	public String codigo;
@@ -45,13 +70,17 @@ public class Aeropuerto {
 	 * @param nCodigoCiudad nuevo codigo de la ciudad del aeropuerto. nCodigoCiudad!=null.
 	 * @param nPais nuevo pais del aeropuerto. nPais!=null
 	 */
-	public Aeropuerto(String nNombre,String nCodigo, String nCiudad,String nPais){
+	public Aeropuerto(String nNombre,String nCodigo, String nCiudad,String nPais, String nLatitud, String nLongitud){
 		nombre=nNombre;
 		ciudad=nCiudad;
 		codigo=nCodigo;
 		pais=nPais;
+		calificacion=0;
 		arbolVuelos=new Trie<Vuelo>();
-		listaVuelos=new Lista<Vuelo>();
+		listaVuelosEntrando=new Lista<Vuelo>();
+		listaVuelosSaliendo=new Lista<Vuelo>();
+		longitud=nLongitud;
+		latitud=nLatitud;
 	}
 	
 	/**
@@ -79,6 +108,34 @@ public class Aeropuerto {
 	}
 	
 	/**
+	 * Cambia la calificacion del aeropuerto.
+	 * @param nuevaCalificacion nueva calificacion del aeropuerto.
+	 */
+	public void cambiarCalificacion(int nuevaCalificacion){
+		calificacion=nuevaCalificacion;
+	}
+	
+	/**
+	 * Agrega un vuelo al aeropuerto.
+	 * @param aAgregar El vuelo a agregar al aerpuerto
+	 * @return
+	 */
+	public boolean agregarVueloEntrando(Vuelo aAgregar){	
+		return listaVuelosEntrando.agregar(aAgregar);
+	}
+	
+	/**
+	 * Agrega un vuelo al aeropuerto.
+	 * @param aAgregar El vuelo a agregar al aerpuerto
+	 * @return
+	 */
+	public boolean agregarVueloSaliendo(Vuelo aAgregar){	
+		return listaVuelosSaliendo.agregar(aAgregar);
+	}
+	
+	
+	
+	/**
 	 * Retorna el nombre del aeropuerto.
 	 * @return El nombre del aeropuerto.
 	 */
@@ -86,6 +143,21 @@ public class Aeropuerto {
 		return nombre;
 	}
 	
+	/**
+	 * Retorna la latitud del aeropuerto.
+	 * @return La latitud del aeropuerto.
+	 */
+	public String darLatitud(){
+		return latitud;
+	}
+	
+	/**
+	 * Retorna la longitud del aeropuerto.
+	 * @return La longitud del aeropuerto.
+	 */
+	public String darLongitud(){
+		return longitud;
+	}
 	/**
 	 * Retorna la ciiudad del aeropuerto.
 	 * @return La ciudad del aeropuerto.
@@ -114,12 +186,35 @@ public class Aeropuerto {
 	 * Retorna el iterador de los vuelos.
 	 * @return El iterador de los vuelos.
 	 */
-	public Iterator<Vuelo> darVuelos(){
-		return listaVuelos.iterator();
+	public Iterator<Vuelo> darVuelosEntrando(){
+		return listaVuelosEntrando.iterator();
+	}
+	
+	/**
+	 * Retorna el iterador de los vuelos.
+	 * @return El iterador de los vuelos.
+	 */
+	public Iterator<Vuelo> darVuelosSaliendo(){
+		return listaVuelosSaliendo.iterator();
+	}
+	
+	/**
+	 * Retorna la calificacion del aeropuerto.
+	 * @return La calificacion del aeropuerto.
+	 */
+	public int darCalificacion(){
+		return calificacion;
 	}
 	
 	public String toString(){
 		
 		return nombre+" "+codigo+" "+ciudad+" "+pais;
+	}
+
+	/**
+	 * Metodo de comparacion.
+	 */
+	public int compareTo(Aeropuerto o) {
+		return codigo.compareTo(o.darCodigo());
 	}
 }

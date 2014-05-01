@@ -3,13 +3,17 @@ package interfaz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mundo.Aerolinea;
+import mundo.Aeropuerto;
 import mundo.CupiFlight;
+import mundo.Vuelo;
 
 @SuppressWarnings("serial")
 public class ServletConsultas extends HttpServlet{
@@ -65,13 +69,13 @@ public class ServletConsultas extends HttpServlet{
 				requerimiento = 10;
 			}
 			
-			imprimirAcciones(requerimiento, response);
+			imprimirAcciones(requerimiento,request, response);
 
 
 			
 		}
 		
-		private void imprimirAcciones(int req, HttpServletResponse response) throws IOException{
+		private void imprimirAcciones(int req,HttpServletRequest request, HttpServletResponse response) throws IOException{
 			PrintWriter out = response.getWriter();
 			out.println("<!DOCTYPE html>");
 			out.println("<html lang=\"en\">");
@@ -160,6 +164,11 @@ public class ServletConsultas extends HttpServlet{
 			out.println("");
 			
 			if(req==7){
+				String cod7=request.getParameter("codReq7");
+				String[] fecha=request.getParameter("fec1Req7").split("/");
+				Date date = new Date(Integer.parseInt(fecha[2]),Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]));
+				String status=request.getParameter("tiposDeVuelos");
+				Iterator<Vuelo> iterador = instancia.consultarVuelos(cod7, date, status, status);
 			out.println("            <!--Respuesta a partir de aqui-->");
 			out.println("            <p></p>");
 			out.println("            <div class=\"container well\">");
@@ -170,24 +179,28 @@ public class ServletConsultas extends HttpServlet{
 			out.println("                  <th>Codigo</th>");
 			out.println("                  <th>Origen</th>");
 			out.println("                  <th>Destino</th>");
-			out.println("                  <th>Atraso</th>");
 			out.println("                  <th>Aerolinea</th>");
 			out.println("                </tr>");
 			out.println("              </thead>");
 			out.println("              <tbody>");
+			int i=0;
+	    	while(iterador.hasNext()){
+	    		Vuelo actual=iterador.next();
+	    		i++;
 			out.println("                <tr>");
-			out.println("                  <td>18F300</td>");
-			out.println("                  <td>BOG</td>");
-			out.println("                  <td>JFK</td>");
-			out.println("                  <td>2</td>");
-			out.println("                  <td>United</td>");
+			out.println("                  <td>"+actual.codigo+"</td>");
+			out.println("                  <td>+"+actual.darOrigen()+"+</td>");
+			out.println("                  <td>"+actual.darDestino()+"</td>");
+			out.println("                  <td>"+actual.aerolinea+"</td>");
 			out.println("                </tr>");
+	    	}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");
 			out.println("        </div>");
 			out.println("        <p></p>");
 			out.println("");
+			requerimiento=-1;
 			}
 			
 			out.println("            <!--Requerimiento 8, estadisticas por aeropuerto-->");
@@ -206,6 +219,12 @@ public class ServletConsultas extends HttpServlet{
 			out.println("");
 			
 			if(req==8){
+						String cod=request.getParameter("codReq8");
+						String[] fecha1=request.getParameter("fec1Req8").split("/");
+						Date date1 = new Date(Integer.parseInt(fecha1[2]),Integer.parseInt(fecha1[0]),Integer.parseInt(fecha1[1]));
+						String[] fecha2=request.getParameter("fec2Req8").split("/");
+						Date date2 = new Date(Integer.parseInt(fecha2[2]),Integer.parseInt(fecha2[0]),Integer.parseInt(fecha2[1]));
+						Iterator<Vuelo> iterador = instancia.consultarVuelosATiempo(date1, date2);
 			out.println("            <!--Respuesta a partir de aqui-->");
 			out.println("            <p></p>");
 			out.println("            <div class=\"container well\">");
@@ -224,20 +243,24 @@ public class ServletConsultas extends HttpServlet{
 			out.println("              </thead>");
 			out.println("              <tbody>");
 			out.println("                <tr>");
-			out.println("                  <td>El Dorado</td>");
-			out.println("                  <td>BOG</td>");
-			out.println("                  <td>1</td>");
-			out.println("                  <td>20</td>");
-			out.println("                  <td>4</td>");
-			out.println("                  <td>5</td>");
-			out.println("                  <td>6</td>");
+			while(iterador.hasNext()){
+			Vuelo actual = iterador.next();
+			out.println("                  <td>"+actual.darOrigen()+"</td>");
+			out.println("                  <td>"+actual.codigo+"</td>");
+			out.println("                  <td>"+actual.darCancelados()+"</td>");
+			out.println("                  <td>"+actual.darOntime()+"</td>");
+			out.println("                  <td>"+actual.darLate15()+"</td>");
+			out.println("                  <td>"+actual.darLate30()+"</td>");
+			out.println("                  <td>"+actual.darLate45()+"</td>");
 			out.println("                </tr>");
+			}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");
 			out.println("        </div>");
 			out.println("        <p></p>");
 			out.println("");
+			requerimiento=-1;
 			}
 			
 			out.println("        <!--Requerimiento 9, vuelos segun calificacion dada-->");
@@ -252,11 +275,6 @@ public class ServletConsultas extends HttpServlet{
 			out.println("                    <option>3</option>");
 			out.println("                    <option>4</option>");
 			out.println("                    <option>5</option>");
-			out.println("                    <option>6</option>");
-			out.println("                    <option>7</option>");
-			out.println("                    <option>8</option>");
-			out.println("                    <option>9</option>");
-			out.println("                    <option>10</option>");
 			out.println("                  </select>");
 			out.println("                    <input type=\"text\" class=\"form-control\" name=\"fec1Req9\" placeholder=\"mm/dd/aa\">");
 			out.println("                    <input type=\"text\" class=\"form-control\" name=\"fec2Req9\" placeholder=\"mm/dd/aa\">");
@@ -267,6 +285,8 @@ public class ServletConsultas extends HttpServlet{
 			out.println("");
 			
 			if(req==9){
+				int puntuacion = Integer.parseInt(request.getParameter("puntuarAirp"));
+				Iterator<Vuelo> iterador=instancia.buscarVuelosRangoCalificacion(puntuacion);
 			out.println("            <!--Respuesta a partir de aqui-->");
 			out.println("            <p></p>");
 			out.println("            <div class=\"container well\">");
@@ -283,20 +303,24 @@ public class ServletConsultas extends HttpServlet{
 			out.println("                </tr>");
 			out.println("              </thead>");
 			out.println("              <tbody>");
+			while(iterador.hasNext()){
+			Vuelo actual = iterador.next();
 			out.println("                <tr>");
-			out.println("                  <td>18F300</td>");
-			out.println("                  <td>BOG</td>");
-			out.println("                  <td>JFK</td>");
-			out.println("                  <td>2</td>");
-			out.println("                  <td>United</td>");
-			out.println("                  <td>10</td>");
+			out.println("                  <td>"+actual.codigo+"</td>");
+			out.println("                  <td>"+actual.darOrigen()+"</td>");
+			out.println("                  <td>"+actual.darDestino()+"</td>");
+			out.println("                  <td>"+actual.darCancelados()+"</td>");
+			out.println("                  <td>"+actual.aerolinea+"</td>");
+			out.println("                  <td>"+actual.darCalificacion()+"</td>");
 			out.println("                </tr>");
+			}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");
 			out.println("        </div>");
 			out.println("        <p></p>");
 			out.println("");
+			requerimiento=-1;
 			}
 			
 			out.println("            <!--Requerimiento 10, se ven las estadisticas de las aerolineas-->");
@@ -314,6 +338,8 @@ public class ServletConsultas extends HttpServlet{
 			out.println("");
 			
 			if(req==10){
+				Iterator<Aerolinea> iterador1=instancia.consultarAerolineasMasVuelosRetrasados();
+				Iterator<Aerolinea> iterador2=instancia.consultarAerolineasMasVuelosRetrasados();
 			out.println("            <!--Respuesta a partir de aqui-->");
 			out.println("            <p></p>");
 			out.println("            <div class=\"container well\">");
@@ -324,20 +350,21 @@ public class ServletConsultas extends HttpServlet{
 			out.println("                  <th>#</th>");
 			out.println("                  <th>Codigo</th>");
 			out.println("                  <th>Nombre</th>");
-			out.println("                  <th>Ciudad</th>");
-			out.println("                  <th>Pais</th>");
-			out.println("                  <th>Puntuaci??n</th>");
+			out.println("                  <th>Vuelos</th>");
 			out.println("                </tr>");
 			out.println("              </thead>");
 			out.println("              <tbody>");
+			int i=0;
+			while(iterador1.hasNext()){
+				i++;
+				Aerolinea actual1=iterador1.next();
 			out.println("                <tr>");
-			out.println("                  <td>1,001</td>");
-			out.println("                  <td>Lorem</td>");
-			out.println("                  <td>ipsum</td>");
-			out.println("                  <td>dolor</td>");
-			out.println("                  <td>dolor</td>");
-			out.println("                  <td>sit</td>");
+			out.println("                  <td>"+i+"</td>");
+			out.println("                  <td>"+actual1.darCodigo()+"</td>");
+			out.println("                  <td>"+actual1.darNombre()+"</td>");
+			out.println("                  <td>"+actual1.darCantidadVuelosRetrasados()+"</td>");
 			out.println("                </tr>");
+			}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");
@@ -357,20 +384,24 @@ public class ServletConsultas extends HttpServlet{
 			out.println("                </tr>");
 			out.println("              </thead>");
 			out.println("              <tbody>");
+			int j=0;
+			while(iterador2.hasNext()){
+				j++;
+				Aerolinea actual2=iterador2.next();
 			out.println("                <tr>");
-			out.println("                  <td>1,001</td>");
-			out.println("                  <td>Lorem</td>");
-			out.println("                  <td>ipsum</td>");
-			out.println("                  <td>dolor</td>");
-			out.println("                  <td>dolor</td>");
-			out.println("                  <td>sit</td>");
+			out.println("                  <td>"+j+"</td>");
+			out.println("                  <td>"+actual2.darCodigo()+"</td>");
+			out.println("                  <td>"+actual2.darNombre()+"</td>");
+			out.println("                  <td>"+actual2.darCantidadVuelosRetrasados()+"</td>");
 			out.println("                </tr>");
+			}
 			out.println("              </tbody>");
 			out.println("            </table>");
 			out.println("          </div>");
 			out.println("        </div>");
 			out.println("");
 			out.println("        <!--Termina respuesta-->");
+			requerimiento=-1;
 			}
 			
 			out.println("");
@@ -389,6 +420,7 @@ public class ServletConsultas extends HttpServlet{
 			out.println("    <script type=\"text/javascript\" src=\"js/bootstrap-datepicker.js\"></script>");
 			out.println("  </body>");
 			out.println("</html>");
+			
 		}
 		
 		@SuppressWarnings("deprecation")

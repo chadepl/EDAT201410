@@ -1,10 +1,16 @@
 package lista;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class Lista<T> implements ILista<T> {
+public class Lista<T> implements ILista<T>,Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private NodoLista<T> primero;
 	
 	private NodoLista<T> ultimo;
